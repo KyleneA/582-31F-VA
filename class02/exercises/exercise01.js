@@ -12,6 +12,17 @@ button.addEventListener("click", () => {
         return;
     }
 
+    output.textContent = "Loading.";
+
+    setTimeout(() => {
+        output.textContent = "Loading..";
+    }, 300);
+
+    setTimeout(() => {
+        output.textContent = "Loading...";
+    }, 600);
+    
+
     setTimeout(() => {
         output.textContent = `Hello, ${name}`;
     }, 1000);
