@@ -17,15 +17,15 @@ function getStudentData() {
     
     const promise = new Promise((resolve, reject) => {
         if (isStudent) {
-            resolve(student);
+            setTimeout(() => {
+                resolve(student);
+            }, 3000);
         } else {
             reject("Load Failed.")
         }
     });
     return promise;
 }
-
-getStudentData();
 
 function renderStudent(student) {
     const title = document.createElement("h2");
@@ -45,4 +45,6 @@ function renderStudent(student) {
     studentDiv.append(studentName, program, semester, bio);
 }
 
-renderStudent(student);
+function getCourseData() {
+    
+}
