@@ -73,3 +73,16 @@ function getCourseData() {
     }
 }
 
+function renderCourses(courses) {
+    const divTitle = document.createElement("h2");
+    const divUl = document.createElement("ul");
+    divTitle.textContent = "Courses";
+    courseDiv.append(divTitle, divUl);
+
+    //add loop here
+    for (course of courses) {
+        const divLi = document.createElement("li");
+        divLi.textContent = `${course.code}: ${course.title}`;
+        divUl.append(divLi);
+    }
+}
