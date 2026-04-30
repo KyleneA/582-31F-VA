@@ -1,3 +1,4 @@
+const statusP = document.getElementById("status");
 const studentDiv = document.getElementById("student-data");
 const studentBtn = document.getElementById("students-btn");
 const courseDiv = document.getElementById("course-data");
@@ -48,7 +49,7 @@ function renderStudent(student) {
 const courses = [
     { code: "WIP2", title: "Web Interface Programming 2" },
     { code: "AWP", title: "Advanced Programming" },
-    { code: "DB2", title: "Database Management Systems 2" }
+    { coode: "DB2", title: "Database Management Systems 2" }
 ];
 
 function areCourses(courses) {
@@ -64,13 +65,16 @@ function areCourses(courses) {
 }
 
 function getCourseData() {
-    if (areCourses(courses)){
-        setTimeout(() => {
-            resolve(courses);
-        }, 3000);
-    } else {
-        reject("Load Failed.");
-    }
+    const promise = new Promise((resolve, reject) => {
+        if (areCourses(courses)){
+            setTimeout(() => {
+                resolve(courses);
+            }, 3000);
+        } else {
+            reject("Load Failed.");
+        }
+    })
+    return promise;
 }
 
 function renderCourses(courses) {
@@ -86,3 +90,23 @@ function renderCourses(courses) {
         divUl.append(divLi);
     }
 }
+renderCourses(courses);
+courseBtn.addEventListener("click", () => {
+    statusP.textContent = "Loading courses...";
+
+    const divTitle = document.querySelector("div#course-data h2");
+    const divUl = document.querySelector("div#course-data ul");
+
+    courseDiv.removeChild(divTitle);
+    courseDiv.removeChild(divUl);
+
+    getCourseData()
+        .then((result) => {
+            renderCourses(result);
+        })
+        .catch((error) => {
+            courseDiv.textContent = error;
+        });
+    
+    statusP.textContent = "";
+});
