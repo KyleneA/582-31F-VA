@@ -45,6 +45,31 @@ function renderStudent(student) {
     studentDiv.append(studentName, program, semester, bio);
 }
 
-function getCourseData() {
-    
+const courses = [
+    { code: "WIP2", title: "Web Interface Programming 2" },
+    { code: "AWP", title: "Advanced Programming" },
+    { code: "DB2", title: "Database Management Systems 2" }
+];
+
+function areCourses(courses) {
+    const areCourses = [];
+
+    for (course of courses) {
+        const isCourse = course.code && course.title;
+        areCourses.push(isCourse);
+    }
+
+    if (areCourses.includes(undefined)) return false;
+    return true;
 }
+
+function getCourseData() {
+    if (areCourses(courses)){
+        setTimeout(() => {
+            resolve(courses);
+        }, 3000);
+    } else {
+        reject("Load Failed.");
+    }
+}
+
