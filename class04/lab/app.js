@@ -20,20 +20,28 @@ function getStudentData() {
         if (isStudent) {
             setTimeout(() => {
                 resolve(student);
-            }, 3000);
+            }, 1000);
         } else {
-            reject("Load Failed.")
+            setTimeout(() => {
+                reject("Load Failed.")
+            }, 1000);
         }
     });
     return promise;
 }
 
 function renderStudent(student) {
+    const oldDivTitle = document.querySelector("#student-data h2");
+    if (oldDivTitle) return;
+
     const title = document.createElement("h2");
     const studentName = document.createElement("h3");
     const program = document.createElement("p");
+    program.className = "program";
     const semester = document.createElement("p");
+    semester.className = "semester";
     const bio = document.createElement("p");
+    bio.className = "bio"
 
     title.textContent = "Student Profile";
     studentDiv.append(title);
@@ -45,6 +53,48 @@ function renderStudent(student) {
 
     studentDiv.append(studentName, program, semester, bio);
 }
+
+function clearStudentDiv() {
+    const title = document.querySelector("#student-data h2");
+    const studentName = document.querySelector("#student-data h3");
+    const program = document.querySelector("#student-data .program");
+    const semester = document.querySelector("#student-data .semester");
+    const bio = document.querySelector("#student-data .bio");
+    const errorP = document.querySelector("#student-data .error");
+    
+    const hasProfileData = title && studentName && program && semester && bio;
+    
+    if (hasProfileData){
+        studentDiv.removeChild(title);
+        studentDiv.removeChild(studentName);
+        studentDiv.removeChild(program);
+        studentDiv.removeChild(semester);
+        studentDiv.removeChild(bio);
+    }
+
+    if (errorP) studentDiv.remove(errorP);
+}
+
+studentBtn.addEventListener("click", () => {
+    statusP.textContent = "Loading student profile...";
+
+    clearStudentDiv();
+
+    getStudentData()
+        .then((result) => {
+            renderStudent(result);
+        })
+        .catch((error) => {
+            const errorP = document.createElement("p");
+            errorP.className = "error";
+            studentDiv.append(errorP);
+            errorP.textContent = error;
+        });
+    
+    setTimeout(() => {
+        statusP.textContent = "Ready";
+    }, 1000);
+})
 
 const courses = [
     { code: "WIP2", title: "Web Interface Programming 2" },
@@ -69,11 +119,11 @@ function getCourseData() {
         if (areCourses(courses)){
             setTimeout(() => {
                 resolve(courses);
-            }, 2000);
+            }, 1000);
         } else {
             setTimeout(() => {
                 reject("Load Failed.");
-            }, 2000);
+            }, 1000);
         }
     })
     return promise;
@@ -95,9 +145,7 @@ function renderCourses(courses) {
     }
 }
 
-courseBtn.addEventListener("click", () => {
-    statusP.textContent = "Loading courses...";
-
+function clearCourseDiv() {
     const divTitle = document.querySelector("div#course-data h2");
     const divUl = document.querySelector("div#course-data ul");
     const divP = document.querySelector("div#course-data p");
@@ -108,6 +156,12 @@ courseBtn.addEventListener("click", () => {
     }
 
     if (divP) courseDiv.removeChild(divP);
+}
+
+courseBtn.addEventListener("click", () => {
+    statusP.textContent = "Loading courses...";
+
+    clearCourseDiv();
 
     getCourseData()
         .then((result) => {
@@ -120,6 +174,14 @@ courseBtn.addEventListener("click", () => {
         });
     
     setTimeout(() => {
-        statusP.textContent = "";
-    }, 1800);
+        statusP.textContent = "Ready";
+    }, 1000);
 });
+
+clearBtn.addEventListener("click", () => {
+    
+    clearCourseDiv();
+    clearStudentDiv();
+
+    statusP.textContent = "Ready";
+})

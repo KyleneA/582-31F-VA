@@ -1,0 +1,21 @@
+.data-container{
+    display: flex;
+    gap: 20px;
+}
+
+#student-data, 
+#course-data {
+    width: 50%;
+    height: calc(100vh - 250px);
+    padding: 10px 20px;
+    border: 1px solid black;
+}
+
+#student-data button, 
+#course-data button{
+    width: 100%;
+}
+
+#course-data li{
+    margin-bottom: 5px;
+}
