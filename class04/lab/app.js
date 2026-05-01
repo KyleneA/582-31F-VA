@@ -49,7 +49,7 @@ function renderStudent(student) {
 const courses = [
     { code: "WIP2", title: "Web Interface Programming 2" },
     { code: "AWP", title: "Advanced Programming" },
-    { coode: "DB2", title: "Database Management Systems 2" }
+    { code: "DB2", title: "Database Management Systems 2" }
 ];
 
 function areCourses(courses) {
@@ -69,44 +69,57 @@ function getCourseData() {
         if (areCourses(courses)){
             setTimeout(() => {
                 resolve(courses);
-            }, 3000);
+            }, 2000);
         } else {
-            reject("Load Failed.");
+            setTimeout(() => {
+                reject("Load Failed.");
+            }, 2000);
         }
     })
     return promise;
 }
 
 function renderCourses(courses) {
+    const oldDivUl = document.querySelector("div#course-data ul");
+    if (oldDivUl) return;
+
     const divTitle = document.createElement("h2");
     const divUl = document.createElement("ul");
     divTitle.textContent = "Courses";
     courseDiv.append(divTitle, divUl);
 
-    //add loop here
     for (course of courses) {
         const divLi = document.createElement("li");
         divLi.textContent = `${course.code}: ${course.title}`;
         divUl.append(divLi);
     }
 }
-renderCourses(courses);
+
 courseBtn.addEventListener("click", () => {
     statusP.textContent = "Loading courses...";
 
     const divTitle = document.querySelector("div#course-data h2");
     const divUl = document.querySelector("div#course-data ul");
+    const divP = document.querySelector("div#course-data p");
 
-    courseDiv.removeChild(divTitle);
-    courseDiv.removeChild(divUl);
+    if (divTitle && divUl){
+        courseDiv.removeChild(divTitle);
+        courseDiv.removeChild(divUl);
+    }
+
+    if (divP) courseDiv.removeChild(divP);
 
     getCourseData()
         .then((result) => {
             renderCourses(result);
         })
         .catch((error) => {
-            courseDiv.textContent = error;
+            const errorP = document.createElement("p");
+            courseDiv.append(errorP);
+            errorP.textContent = error;
         });
     
-    statusP.textContent = "";
+    setTimeout(() => {
+        statusP.textContent = "";
+    }, 1800);
 });
