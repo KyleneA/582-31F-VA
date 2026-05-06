@@ -57,10 +57,14 @@ loadBtn.addEventListener("click", () => {
     statusP.textContent = "Loading user..."
     output.innerHTML = "";
 
-    const userFetch = fetch("https://jsonplaceholder.typicode.com/users/50");
+    const userFetch = fetch("https://jsonplaceholder.typicode.com/users/5");
     
     userFetch
         .then((response) => {
+            if (response.ok === false){
+                throw new Error(`HTTP error (${response.status})`);
+            }
+            
             return response.json();
         })
         .then((data) => {
@@ -71,6 +75,7 @@ loadBtn.addEventListener("click", () => {
             statusP.textContent = "User loaded successfully!";
         })
         .catch((error) => {
+            // will only show for server errors
             statusP.text = "Failed to load user...";
             console.log(error);
         });
