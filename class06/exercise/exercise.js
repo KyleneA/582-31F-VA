@@ -21,4 +21,7 @@ console.log("type:", typeof courseJSON);
 
 // Exercise 3
 const courseJSONReadable = JSON.stringify(course, null, 4);
+// for replacer parameter can use ["title", "active"] to only keep the title and active keys from the object
 console.log("Readable JSON:", courseJSONReadable);
+const courseJSONReadableReplacer = JSON.stringify(course, ["title", "active"], 4);
+console.log("Readable JSON with replacer:", courseJSONReadableReplacer);
