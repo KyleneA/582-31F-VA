@@ -57,6 +57,14 @@ const badJSON = "{name: 'Alice'}";
 ```
 ### Stringify
 using `JSON.stringify()`
+- can have 3 properties
+	- value to stringify
+		- A JavaScript value, usually an object or array, to be converted.
+	- replacer
+		- An array of strings and numbers that acts as an approved list for selecting the object properties that will be stringified.
+	- space 
+		- Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read
+
 ```js
 const arrayJS = ['html', 'css', 'js'];
 const arrayJSToJSON = JSON.stringify(arrayJS);
