@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class 06 - Homework 02</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="bg-info-subtle">
+    <main>
+        <section class="user py-5">
+            <div class="container">
+                <h1> User Information </h1>
+                <p class="fs-4"> This page loads user data from the https://jsonplaceholder.typicode.com API.</p>
+                <button class="btn btn-lg btn-info text-capitalize my-3">load user</button>
+                <div class="card">
+                    <div class="card-header">
+                        <p id="status" class="text-success text-uppercase fs-4 fw-medium  mb-0">ready</p>
+                    </div>
+
+                    <div class="card-body" id="card-body"></div>
+                </div>
+            </div>
+        </section>
+    </main>
     
     <script src="script.js"></script>
 </body>
