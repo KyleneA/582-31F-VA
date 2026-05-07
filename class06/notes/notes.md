@@ -1,29 +1,27 @@
-fetch("https://jsonplaceholder.typicode.com/users/1")
-    .then((response) => {
-        console.log(response);
-        return response.json();
-    })
-    .then((user) => {
-        console.log(user.name);
-    });
+## JSON
+JavaScript Object Notation 
+=> **text format** used to represent structured data
+- essentially 1 reeeeally long string
+### Serialization
+turns data into text
+### Deserialization
+turns text into data
+### Valid types in JSON
+- string
+- numbers
+- boolean
+- null
+- object (js or other)
+- array
 
-let obj = {
-    name: "Leanne Graham",
-    address: "123 street",
-    // etc
-};
-
-// JS Object
-const student = {
-    name: "Leanne Graham",
-    address: "123 street",
-    // etc
-};
-
-// JSON file
-const jsonText = '{"name": "Leanne Graham", "address": "123 street", "etc": "etc"}';
-
-// PARSING
+> [!important]
+> NOT SUPPORTED:
+> - functions
+> - comments
+> - undefined
+### Parsing JSON
+using `JSON.parse()`
+```js
 const studentJSON = '{"name": "Leanne Graham", "address": "123 street", "etc": "etc"}';
 const parsedStudent = JSON.parse(studentJSON);
 console.log(typeof studentJSON, studentJSON);
@@ -56,27 +54,16 @@ const badJSON = "{name: 'Alice'}";
 // syntax errors
 // should be single quote outside AND
 // should have key with double quotes
-
-// STRINGIFY
-// js object
-const product = {
-    name: "mouse",
-    category: "electronics",
-    price: 10.55,
-};
-
-const productJSON = JSON.stringify(product);
-console.log("JS object");
-console.log(typeof product, product);
-console.log("JSON text");
-console.log(typeof productJSON, productJSON);
-
-// array
+```
+### Stringify
+using `JSON.stringify()`
+```js
 const arrayJS = ['html', 'css', 'js'];
 const arrayJSToJSON = JSON.stringify(arrayJS);
 console.log('*From', arrayJS, `(${typeof arrayJS})`, 'to', arrayJSToJSON, `(${typeof arrayJSToJSON})`);
-
-// Limitations
+```
+### Limitations
+```js
 const book = {
     name: "Lake",
     author: "Banana",
@@ -90,11 +77,26 @@ console.log(book);
 
 const bookJSON = JSON.stringify(book);
 console.log(bookJSON); // => will ignore read function & price because JSON is for data, not behaviour 
+```
 
-// Understanding what happens to JSON during fetch
+### JS Object vs JSON
+**JS Object**
+- lives as JS value
+- can have methods
+- keys don't need quotes
+- uses JS syntax rules
+
+**JSON**
+- is plain text
+- used for exchanging data
+- keys MUST use **double quotes**
+- must follow string JSON syntax
+
+## JSON in fetch
+```js
 fetch("https://jsonplaceholder.typicode.com/users/6")
     .then((response) => {
-        console.log("fetch user 6",response);
+        console.log(response);
         return response.json(); // parses response into JS object
     })
     .then((user) => {
@@ -105,3 +107,4 @@ fetch("https://jsonplaceholder.typicode.com/users/6")
     .then((user) => {
 	    console.log(JSON.stringify(user, null, 2)); // properties to pretty print
     });
+```
