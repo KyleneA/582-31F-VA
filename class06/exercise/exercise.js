@@ -14,7 +14,11 @@ const course = {
     active: true
 };
 
-const courseJSON = JSON.stringify(course, null, 2);
+const courseJSON = JSON.stringify(course);
 
 console.log("result:", courseJSON);
 console.log("type:", typeof courseJSON);
+
+// Exercise 3
+const courseJSONReadable = JSON.stringify(course, null, 4);
+console.log(courseJSONReadable);
