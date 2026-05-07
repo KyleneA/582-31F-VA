@@ -57,7 +57,7 @@ const badJSON = "{name: 'Alice'}";
 ```
 ### Stringify
 using `JSON.stringify()`
-- can have 3 properties
+- can have 3 paramaters
 	- value to stringify
 		- A JavaScript value, usually an object or array, to be converted.
 	- replacer
