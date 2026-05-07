@@ -21,4 +21,4 @@ console.log("type:", typeof courseJSON);
 
 // Exercise 3
 const courseJSONReadable = JSON.stringify(course, null, 4);
-console.log(courseJSONReadable);
+console.log("Readable JSON:", courseJSONReadable);
