@@ -71,6 +71,9 @@ console.log(typeof product, product);
 console.log("JSON text");
 console.log(typeof productJSON, productJSON);
 
+const productJSONReadable = JSON.stringify(product, null, 2);
+console.log(productJSONReadable);
+
 // array
 const arrayJS = ['html', 'css', 'js'];
 const arrayJSToJSON = JSON.stringify(arrayJS);

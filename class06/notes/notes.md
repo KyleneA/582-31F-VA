@@ -66,6 +66,23 @@ using `JSON.stringify()`
 		- Adds indentation, white space, and line break characters to the return-value JSON text to make it easier to read
 
 ```js
+// js object
+const product = {
+    name: "mouse",
+    category: "electronics",
+    price: 10.55,
+};
+
+const productJSON = JSON.stringify(product);
+console.log("JS object");
+console.log(typeof product, product);
+console.log("JSON text");
+console.log(typeof productJSON, productJSON);
+
+const productJSONReadable = JSON.stringify(product, null, 2);
+console.log(productJSONReadable);
+
+// array
 const arrayJS = ['html', 'css', 'js'];
 const arrayJSToJSON = JSON.stringify(arrayJS);
 console.log('*From', arrayJS, `(${typeof arrayJS})`, 'to', arrayJSToJSON, `(${typeof arrayJSToJSON})`);
