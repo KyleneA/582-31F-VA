@@ -20,7 +20,7 @@ loadBtn.addEventListener("click", () => {
         .then((response) => {
             console.log(response);
             if (response.ok === false) {
-                throw new Error(`HTTP Error (${response.status})`);
+                throw new Error(`(${response.status})`);
             }
 
             return response.json();
@@ -36,14 +36,21 @@ loadBtn.addEventListener("click", () => {
             setTimeout(() => {
                 if (bodyDiv.innerHTML) return;
                 bodyDiv.append(h2, email, phone, city);
-
+                
                 statusP.textContent = "User loaded successfully";
                 statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
             }, 2000);
         })
         .catch((error) => {
             console.log(error);
+            const errorAlert = document.createElement("div");
+            errorAlert.className = "fs-5 alert alert-danger";
+            errorAlert.textContent = error;
+            
             setTimeout(() => {
+                if (bodyDiv.innerHTML) return;
+                bodyDiv.appendChild(errorAlert);
+
                 statusP.textContent = "Failed to load user";
                 statusP.className = "text-danger text-uppercase fs-5 fw-medium  mb-0";
             }, 1000)
