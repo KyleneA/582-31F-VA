@@ -21,13 +21,6 @@ loadBtn.addEventListener("click", () => {
 
     bodyDiv.innerHTML = "";
 
-    const h2 = document.createElement("h2");
-    const email = document.createElement("p");
-    const phone = document.createElement("p");
-    const city = document.createElement("p");
-    const company = document.createElement("p");
-    const website = document.createElement("p");
-
     const userFetch = fetch("https://jsonplaceholder.typicode.com/users/1");
 
     userFetch
@@ -35,10 +28,17 @@ loadBtn.addEventListener("click", () => {
             if (response.ok === false) {
                 throw new Error(`(${response.status})`);
             }
-
+            console.log(response);
             return response.json();
         })
         .then ((data) => {
+            const h2 = document.createElement("h2");
+            const email = document.createElement("p");
+            const phone = document.createElement("p");
+            const city = document.createElement("p");
+            const company = document.createElement("p");
+            const website = document.createElement("p");
+                
             h2.textContent = data.name;
             h2.className = "mb-3";
             
@@ -46,10 +46,8 @@ loadBtn.addEventListener("click", () => {
             phone.textContent = "Phone Number: " + (data.phone ?? "N/A");
             city.textContent = "City: " + (data.city ?? "N/A");
             company.textContent = "Company: " + (data.company.name ?? "N/A");
-            
-            
             website.textContent = "Website: " + (data.website ?? "N/A");
-            console.log(data.company);
+            
             setTimeout(() => {
                 if (bodyDiv.innerHTML) return;
                 bodyDiv.append(h2, email, phone, city, company, website);
