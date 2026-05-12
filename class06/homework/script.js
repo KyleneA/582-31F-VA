@@ -25,12 +25,13 @@ loadBtn.addEventListener("click", () => {
     const email = document.createElement("p");
     const phone = document.createElement("p");
     const city = document.createElement("p");
+    const company = document.createElement("p");
+    const website = document.createElement("p");
 
     const userFetch = fetch("https://jsonplaceholder.typicode.com/users/1");
 
     userFetch
         .then((response) => {
-            console.log(response);
             if (response.ok === false) {
                 throw new Error(`(${response.status})`);
             }
@@ -44,10 +45,14 @@ loadBtn.addEventListener("click", () => {
             email.textContent = "Email: " + (data.email ?? "N/A");
             phone.textContent = "Phone Number: " + (data.phone ?? "N/A");
             city.textContent = "City: " + (data.city ?? "N/A");
-
+            company.textContent = "Company: " + (data.company.name ?? "N/A");
+            
+            
+            website.textContent = "Website: " + (data.website ?? "N/A");
+            console.log(data.company);
             setTimeout(() => {
                 if (bodyDiv.innerHTML) return;
-                bodyDiv.append(h2, email, phone, city);
+                bodyDiv.append(h2, email, phone, city, company, website);
                 
                 statusP.textContent = "User loaded successfully";
                 statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
@@ -68,6 +73,8 @@ loadBtn.addEventListener("click", () => {
 
                 statusP.textContent = "Failed to load user";
                 statusP.className = "text-danger text-uppercase fs-5 fw-medium mb-0";
+                
+                spinner.remove()
 
                 clearBtn.disabled = false;
             }, 1000)
@@ -90,4 +97,3 @@ clearBtn.addEventListener("click", () => {
         spinner.remove();
     }, 750)
 });
-
