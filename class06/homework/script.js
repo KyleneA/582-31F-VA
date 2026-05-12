@@ -95,3 +95,12 @@ clearBtn.addEventListener("click", () => {
         spinner.remove();
     }, 750)
 });
+
+/**
+ * Reflection
+ * fetch() return a Reponse object
+ * response.json() parses the Response object into a JS object and allows us to use the JSON data information
+ * the Response object has different attributes relating to the resolved promise from the fetch (like status & ok) while the parsed data is a usable JS object with the information requested in the fetch()
+ * the page shows data is loading through the change in status text in the card header div
+ * if the ok attribute from the response is false, an error is thrown and the catch handles displaying the error status messages
+*/
