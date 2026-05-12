@@ -1,12 +1,11 @@
-const loadBtn = document.querySelector(".btn");
+const loadBtn = document.querySelector(".btn.btn-info");
 const statusP = document.getElementById("status");
 const bodyDiv = document.getElementById("card-body");
-
-console.log(loadBtn, statusP, bodyDiv);
+const clearBtn = document.querySelector(".btn.btn-outline-info");
 
 loadBtn.addEventListener("click", () => {
     statusP.textContent = "Loading...";
-    statusP.className = "text-uppercase fs-5 fw-medium  mb-0";
+    statusP.className = "text-uppercase fs-5 fw-medium mb-0";
     bodyDiv.innerHTML = "";
 
     const h2 = document.createElement("h2");
@@ -39,6 +38,8 @@ loadBtn.addEventListener("click", () => {
                 
                 statusP.textContent = "User loaded successfully";
                 statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
+
+                clearBtn.disabled = false;
             }, 2000);
         })
         .catch((error) => {
@@ -52,7 +53,21 @@ loadBtn.addEventListener("click", () => {
                 bodyDiv.appendChild(errorAlert);
 
                 statusP.textContent = "Failed to load user";
-                statusP.className = "text-danger text-uppercase fs-5 fw-medium  mb-0";
+                statusP.className = "text-danger text-uppercase fs-5 fw-medium mb-0";
+
+                clearBtn.disabled = false;
             }, 1000)
         });
+});
+
+clearBtn.addEventListener("click", () => {
+    statusP.textContent = "clearing...";
+    statusP.className = "text-primary text-uppercase fs-5 fw-medium mb-0";
+
+    setTimeout(() => {
+        statusP.textContent = "ready";
+        statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
+        bodyDiv.innerHTML = "";
+        clearBtn.disabled = true;
+    }, 750)
 });

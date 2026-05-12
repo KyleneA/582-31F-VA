@@ -13,8 +13,15 @@
         <section class="user py-5">
             <div class="container">
                 <h1> User Information </h1>
-                <p class="fs-4"> This page loads user data from the https://jsonplaceholder.typicode.com API.</p>
-                <button class="btn btn-lg btn-info text-capitalize my-3">load user</button>
+                
+                <p class="fs-5"> This page loads user data from the https://jsonplaceholder.typicode.com API.</p>
+                
+                <div class="button-holder my-3">
+                    <button class="btn btn-lg btn-info text-capitalize">load user</button>
+
+                    <button class="btn btn-lg btn-outline-info text-capitalize" disabled>clear</button>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         <p id="status" class="text-success text-uppercase fs-5 fw-medium  mb-0">ready</p>
@@ -22,6 +29,7 @@
 
                     <div class="card-body" id="card-body"></div>
                 </div>
+
             </div>
         </section>
     </main>
