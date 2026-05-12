@@ -3,9 +3,22 @@ const statusP = document.getElementById("status");
 const bodyDiv = document.getElementById("card-body");
 const clearBtn = document.querySelector(".btn.btn-outline-info");
 
+const spinner = document.createElement("div");
+spinner.className = "spinner-border";
+spinner.role = "status";
+
+const spinnerSpan = document.createElement("span");
+spinnerSpan.className = "visually-hidden";
+spinnerSpan.textContent = "Loading...";
+spinner.appendChild(spinnerSpan);
+
+
 loadBtn.addEventListener("click", () => {
     statusP.textContent = "Loading...";
     statusP.className = "text-uppercase fs-5 fw-medium mb-0";
+    
+    statusP.parentElement.prepend(spinner);
+
     bodyDiv.innerHTML = "";
 
     const h2 = document.createElement("h2");
@@ -38,6 +51,7 @@ loadBtn.addEventListener("click", () => {
                 
                 statusP.textContent = "User loaded successfully";
                 statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
+                spinner.remove();
 
                 clearBtn.disabled = false;
             }, 2000);
@@ -64,10 +78,16 @@ clearBtn.addEventListener("click", () => {
     statusP.textContent = "clearing...";
     statusP.className = "text-primary text-uppercase fs-5 fw-medium mb-0";
 
+    spinner.className = "spinner-border text-primary";
+    statusP.parentElement.prepend(spinner);
+
     setTimeout(() => {
         statusP.textContent = "ready";
         statusP.className = "text-success text-uppercase fs-5 fw-medium  mb-0";
         bodyDiv.innerHTML = "";
         clearBtn.disabled = true;
+
+        spinner.remove();
     }, 750)
 });
+
