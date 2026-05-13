@@ -26,6 +26,10 @@ button{
     margin: 0 auto;
 }
 
+.heading{
+    background-color: lemonchiffon;
+}
+
 #status{
     margin: 15px 0;
 }
@@ -38,4 +42,5 @@ button{
 
 .post-title{
     text-transform: capitalize;
+    margin-bottom: 15px;
 }
