@@ -15,7 +15,6 @@ loadPostBtn.addEventListener("click", () => {
             return response.json();
         })
         .then ((post) => {
-            console.log(post);
             const titleH2 = document.createElement("h2");
             titleH2.textContent = post.title;
             titleH2.className = "post-title";
@@ -31,7 +30,6 @@ loadPostBtn.addEventListener("click", () => {
             }, 1000);
         })
         .catch((error) => {
-            console.log(error + 2);
             statusP.textContent = "Post failed to load";
             statusP.style.color = "crimson";
             postDiv.textContent = error;
