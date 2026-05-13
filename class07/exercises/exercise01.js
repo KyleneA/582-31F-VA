@@ -4,9 +4,9 @@ const postDiv = document.getElementById("post-content");
 
 loadPostBtn.addEventListener("click", () => {
     statusP.textContent = "Loading post...";
-    postDiv.innerHTML = "";
+    statusP.style.color = "blue";
 
-    fetch("https://jsonplaceholder.typicode.com/posts/1")
+    fetch("https://jsonplaceholder.typicode.com/posts/6")
         .then((response) => {
             if (!response.ok){
                 throw new Error(`HTTP ${response.status} Error`);
@@ -24,13 +24,16 @@ loadPostBtn.addEventListener("click", () => {
             bodyP.textContent = post.body;
 
             setTimeout(() => {
+                postDiv.innerHTML = "";
                 statusP.textContent = "Post was successfully loaded";
+                statusP.style.color = "darkgreen";
                 postDiv.append(titleH2, bodyP);
             }, 1000);
         })
         .catch((error) => {
-            console.log(error);
+            console.log(error + 2);
             statusP.textContent = "Post failed to load";
+            statusP.style.color = "crimson";
             postDiv.textContent = error;
         });
 });
