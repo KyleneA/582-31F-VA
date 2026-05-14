@@ -90,6 +90,44 @@ function createUserCardBody(user, cardBody){
     cardBody.append(email, phone, city, company);
     return cardBody;
 }
+
+function loadUserPosts(user, ul){
+    fetch("https://jsonplaceholder.typicode.com/posts/")
+        .then((response) => {
+            if (!response.ok){
+                throw new Error(`HTTP ${response.status} Error`);
+            }
+            return response.json();
+        })
+        .then((posts) => {
+            const userPosts = posts.filter(post => post.userId === user.id);
+
+            displayUserPosts(userPosts, ul);
+        })
+        .catch((error) => {
+            setTimeout(() => {
+                console.log(error);
+                setStatus(p, "error", error.message);
+            }, 500);
+        });
+}
+
+function displayUserPosts(userPosts, ul){
+    for (const post of userPosts){
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+
+        const postTitle = document.createElement("p");
+        postTitle.className = "fw-medium"
+        postTitle.textContent = post.title;
+
+        const postBody = document.createElement("p");
+        postBody.textContent = post.body;
+
+        li.append(postTitle, postBody);
+        
+        ul.appendChild(li);
+    }
 }
 
 function main() {
