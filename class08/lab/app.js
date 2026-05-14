@@ -19,6 +19,9 @@ function setStatus(p, type, message){
     if (type === "error-post"){
         p.className = "list-group-item text-uppercase bg-danger-subtle";
     }
+    if (type === "clear"){
+        p.className = "text-uppercase fw-medium fs-5 text-success";
+    }
 }
 
 function loadUsers(p, cardsDiv){
@@ -30,7 +33,6 @@ function loadUsers(p, cardsDiv){
                 return response.json();
             })
             .then((users) => {
-                
                 setTimeout(() => {
                     for (let user = 0; user < 5; user++){
                         const userCard = displayUser(users[user]);
@@ -58,10 +60,11 @@ function displayUser(user){
     const postStatus = card.children[2].children[1];
     postBtn.addEventListener("click", () => {
         setStatus(postStatus, "loading-post", "Loading ...");
+        postBtn.disabled = true;
 
         setTimeout(() => {
             loadUserPosts(user, card.children[2], postStatus);
-        }, 1000);
+        }, 500);
     });
     return card;
 }
@@ -159,9 +162,21 @@ function main() {
     
     loadBtn.addEventListener("click", () => {
         setStatus(statusP, "loading", "loading...");
+        cardsHolder.innerHTML = "";
+        loadBtn.disabled = true;
 
         loadUsers(statusP, cardsHolder);
+
+        clearBtn.disabled = false;
     });
+
+    clearBtn.addEventListener("click", () => {
+        cardsHolder.innerHTML = "";
+
+        setStatus(statusP, "clear", "Ready to load users");
+        
+        clearBtn.disabled = true;
+    })
 }
 
 main();
