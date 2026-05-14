@@ -11,7 +11,7 @@ function setStatus(p, type, message){
         p.className = "text-uppercase fw-medium fs-5";
     }
     if (type === "success-post"){
-        p.className = "list-group-item text-uppercase bg-info-subtle";
+        p.className = "list-group-item text-uppercase bg-info-subtle d-flex justify-content-between";
     }
     if (type === "error"){
         p.className = "text-uppercase text-danger fw-medium fs-5";
@@ -21,6 +21,9 @@ function setStatus(p, type, message){
     }
     if (type === "clear"){
         p.className = "text-uppercase fw-medium fs-5 text-success";
+    }
+    if (type === "clear-post"){
+        p.className = "list-group-item text-uppercase text-success";
     }
 }
 
@@ -52,20 +55,33 @@ function loadUsers(p, cardsDiv){
 
 function displayUser(user){
     const card = createUserCard(user);
+    const cardHeader = card.children[0];
+    const cardBody = card.children[1];
+    const postList = card.children[2];
 
-    card.children[0].textContent = user.name;
-    createUserCardBody(user, card.children[1]);
+    cardHeader.textContent = user.name;
+    createUserCardBody(user, cardBody);
 
-    const postBtn = card.children[2].children[0];
-    const postStatus = card.children[2].children[1];
+    const postBtn = postList.children[0];
+    const postStatus = postList.children[1];
     postBtn.addEventListener("click", () => {
         setStatus(postStatus, "loading-post", "Loading ...");
         postBtn.disabled = true;
 
         setTimeout(() => {
-            loadUserPosts(user, card.children[2], postStatus);
+            loadUserPosts(user, postList, postStatus);
         }, 500);
     });
+
+    postStatus.addEventListener("click", () => {
+        if (postStatus.textContent === "ready to load posts") return;
+        postList.innerHTML = "";
+        postList.append(postBtn, postStatus);
+
+        setStatus(postStatus, "clear-post", "Ready to load users");
+        
+        postBtn.disabled = false;
+    })
     return card;
 }
 
@@ -73,8 +89,8 @@ function createUserCard(user){
     const card = document.createElement("div");
     card.className = "card mb-2 p-0";
     
-    const cardHead = document.createElement("div");
-    cardHead.className = "card-header fs-6 fw-medium";
+    const cardHeader = document.createElement("div");
+    cardHeader.className = "card-header fs-6 fw-medium";
     
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
@@ -93,7 +109,7 @@ function createUserCard(user){
     postLoadStatus.textContent = "ready to load posts";
     userPostsList.appendChild(postLoadStatus);
 
-    card.append(cardHead, cardBody, userPostsList);
+    card.append(cardHeader, cardBody, userPostsList);
     return card;
 }
 
@@ -125,6 +141,11 @@ function loadUserPosts(user, ul, postStatus){
             displayUserPosts(userPosts, ul);
 
             setStatus(postStatus, "success-post", "Posts were loaded successfully!");
+
+            const closePosts = document.createElement("button");
+            closePosts.className = "btn-close";
+            closePosts.type = "button";
+            postStatus.appendChild(closePosts);
         })
         .catch((error) => {
             setTimeout(() => {
@@ -134,7 +155,8 @@ function loadUserPosts(user, ul, postStatus){
         });
 }
 
-function displayUserPosts(userPosts, ul){
+function displayUserPosts(userPosts, ul, closePosts){
+
     for (const post of userPosts){
         if (ul.children.length > 4) return;
 
