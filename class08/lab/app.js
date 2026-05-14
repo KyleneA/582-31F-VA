@@ -1,15 +1,23 @@
 function setStatus(p, type, message){
+    p.textContent = message;
+
     if (type === "loading"){
-        p.textContent = message;
         p.className = "text-uppercase text-primary fw-medium fs-5";
     }
+    if (type === "loading-post"){
+        p.className = "list-group-item text-uppercase text-primary";
+    }
     if (type === "success"){
-        p.textContent = message;
         p.className = "text-uppercase fw-medium fs-5";
     }
+    if (type === "success-post"){
+        p.className = "list-group-item text-uppercase bg-info-subtle";
+    }
     if (type === "error"){
-        p.textContent = message;
         p.className = "text-uppercase text-danger fw-medium fs-5";
+    }
+    if (type === "error-post"){
+        p.className = "list-group-item text-uppercase bg-danger-subtle";
     }
 }
 
@@ -17,7 +25,7 @@ function loadUsers(p, cardsDiv){
     fetch("https://jsonplaceholder.typicode.com/users")
             .then((response) => {
                 if (!response.ok){
-                    throw new Error(`HTTP ${response.status} Error`);
+                    throw new Error(`HTTP Error ${response.status}`);
                 }
                 return response.json();
             })
@@ -47,8 +55,13 @@ function displayUser(user){
     createUserCardBody(user, card.children[1]);
 
     const postBtn = card.children[2].children[0];
+    const postStatus = card.children[2].children[1];
     postBtn.addEventListener("click", () => {
-        loadUserPosts(user, card.children[2]);
+        setStatus(postStatus, "loading-post", "Loading ...");
+
+        setTimeout(() => {
+            loadUserPosts(user, card.children[2], postStatus);
+        }, 1000);
     });
     return card;
 }
@@ -67,10 +80,15 @@ function createUserCard(user){
     userPostsList.className = "list-group list-group-flush";
     
     const loadPostsBtn = document.createElement("button");
-    loadPostsBtn.className = "btn btn-sm btn-info";
+    loadPostsBtn.className = "btn btn-sm btn-info rounded-0";
     loadPostsBtn.id = `load-posts-user${user.id}`;
     loadPostsBtn.textContent = "load posts";
     userPostsList.appendChild(loadPostsBtn);
+
+    const postLoadStatus = document.createElement("li");
+    postLoadStatus.className = "list-group-item text-uppercase text-success";
+    postLoadStatus.textContent = "ready to load posts";
+    userPostsList.appendChild(postLoadStatus);
 
     card.append(cardHead, cardBody, userPostsList);
     return card;
@@ -91,23 +109,24 @@ function createUserCardBody(user, cardBody){
     return cardBody;
 }
 
-function loadUserPosts(user, ul){
+function loadUserPosts(user, ul, postStatus){
     fetch("https://jsonplaceholder.typicode.com/posts/")
         .then((response) => {
             if (!response.ok){
-                throw new Error(`HTTP ${response.status} Error`);
+                throw new Error(`HTTP Error ${response.status}`);
             }
             return response.json();
         })
         .then((posts) => {
             const userPosts = posts.filter(post => post.userId === user.id);
-
             displayUserPosts(userPosts, ul);
+
+            setStatus(postStatus, "success-post", "Posts were loaded successfully!");
         })
         .catch((error) => {
             setTimeout(() => {
                 console.log(error);
-                setStatus(p, "error", error.message);
+                setStatus(postStatus, "error-post", error.message);
             }, 500);
         });
 }
