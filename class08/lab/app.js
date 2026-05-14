@@ -42,6 +42,8 @@ function loadUsers(p, cardsDiv){
             })
             .then((users) => {
                 setTimeout(() => {
+                    searchUsers(cardsDiv);
+
                     for (let user = 0; user < 5; user++){
                         const userCard = displayUser(users[user]);
                         cardsDiv.append(userCard);
@@ -56,6 +58,24 @@ function loadUsers(p, cardsDiv){
                     setStatus(p, "error", error.message);
                 }, 500);
             });
+}
+
+function searchUsers(cardsDiv){
+    const searchUsers = document.querySelector(".search-users");
+    searchUsers.style = "display: block";
+    const input = searchUsers.children[0];
+
+    input.addEventListener("input", () => {
+        const searchValue = input.value.toLowerCase();
+        const users = cardsDiv.children;
+
+        for (const user of users){
+            user.style = "display: none;";
+            const userName = user.children[0].textContent.toLowerCase();
+
+            if (userName.includes(searchValue) || searchValue === "") user.style = "display: block;";
+        }
+    })
 }
 
 function displayUser(user){

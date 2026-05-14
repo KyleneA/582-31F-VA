@@ -27,3 +27,7 @@ button{
 .banner{
     background-color: honeydew;
 }
+
+.search-users{
+    display: none;
+}
