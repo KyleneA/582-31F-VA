@@ -133,6 +133,8 @@ function loadUserPosts(user, ul, postStatus){
 
 function displayUserPosts(userPosts, ul){
     for (const post of userPosts){
+        if (ul.children.length > 4) return;
+
         const li = document.createElement("li");
         li.className = "list-group-item";
 
