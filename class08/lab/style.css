@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    margin-bottom: 15px;
+}
+
+p{
+    margin-bottom: 10px;
+}
+
+p:last-of-type{
+    margin-bottom: 0;
+}
+
+section{
+    padding: 80px;
+}
+
+button{
+    text-transform: capitalize;
+}
+
+.banner{
+    background-color: honeydew;
+}
