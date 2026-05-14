@@ -40,6 +40,52 @@ function loadUsers(p, cardsDiv){
             });
 }
 
+function displayUser(user) {
+    const card = createUserCard();
+
+    card.children[0].textContent = user.name;
+    createUserCardBody(user, card.children[1]);
+
+    return card;
+}
+
+function createUserCard(){
+    const card = document.createElement("div");
+    card.className = "card mb-2 p-0";
+    
+    const cardHead = document.createElement("div");
+    cardHead.className = "card-header fs-6 fw-medium";
+    
+    const cardBody = document.createElement("div");
+    cardBody.className = "card-body";
+    
+    const userPosts = document.createElement("ul");
+    userPosts.className = "list-group list-group-flush";
+    
+    const loadPostsBtn = document.createElement("button");
+    loadPostsBtn.className = "btn btn-sm btn-info";
+    loadPostsBtn.id = "load-posts";
+    loadPostsBtn.textContent = "load posts";
+    userPosts.appendChild(loadPostsBtn);
+
+    card.append(cardHead, cardBody, userPosts);
+    return card;
+}
+
+function createUserCardBody(user, body){
+    const email = document.createElement("p");
+    const phone = document.createElement("p");
+    const city = document.createElement("p");
+    const company = document.createElement("p");
+
+    email.textContent = `Email: ${user.email}`;
+    phone.textContent = `Phone Number: ${user.phone}`;
+    city.textContent = `City: ${user.city ?? "n/a"}`;
+    company.textContent = `Company Name: ${user.company.name}`;
+
+    body.append(email, phone, city, company);
+    return body;
+}
 
 function main() {
     const loadBtn = document.getElementById('load-btn');
