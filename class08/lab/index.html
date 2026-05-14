@@ -11,7 +11,7 @@
 
     <!-- Custom -->
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </head>
 <body>
     <main>
@@ -30,12 +30,12 @@
                     </div>
 
                     <div class="btns-holder w-25 d-flex gap-2 justify-content-end">
-                        <button class="btn btn-success">Load users</button>
-                        <button class="btn btn-outline-success">Clear</button>
+                        <button class="btn btn-success" id="load-btn">Load users</button>
+                        <button class="btn btn-outline-success" id="clear-btn" disabled>Clear</button>
                     </div>
                 </div>
 
-                <div class="user-cards row" id="user-cards"></div>
+                <div class="cards-holder row" id="cards-holder"></div>
             </div>
         </section>
     </main>
