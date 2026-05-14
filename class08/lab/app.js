@@ -40,16 +40,20 @@ function loadUsers(p, cardsDiv){
             });
 }
 
-function displayUser(user) {
-    const card = createUserCard();
+function displayUser(user){
+    const card = createUserCard(user);
 
     card.children[0].textContent = user.name;
     createUserCardBody(user, card.children[1]);
 
+    const postBtn = card.children[2].children[0];
+    postBtn.addEventListener("click", () => {
+        loadUserPosts(user, card.children[2]);
+    });
     return card;
 }
 
-function createUserCard(){
+function createUserCard(user){
     const card = document.createElement("div");
     card.className = "card mb-2 p-0";
     
@@ -59,20 +63,20 @@ function createUserCard(){
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
     
-    const userPosts = document.createElement("ul");
-    userPosts.className = "list-group list-group-flush";
+    const userPostsList = document.createElement("ul");
+    userPostsList.className = "list-group list-group-flush";
     
     const loadPostsBtn = document.createElement("button");
     loadPostsBtn.className = "btn btn-sm btn-info";
-    loadPostsBtn.id = "load-posts";
+    loadPostsBtn.id = `load-posts-user${user.id}`;
     loadPostsBtn.textContent = "load posts";
-    userPosts.appendChild(loadPostsBtn);
+    userPostsList.appendChild(loadPostsBtn);
 
-    card.append(cardHead, cardBody, userPosts);
+    card.append(cardHead, cardBody, userPostsList);
     return card;
 }
 
-function createUserCardBody(user, body){
+function createUserCardBody(user, cardBody){
     const email = document.createElement("p");
     const phone = document.createElement("p");
     const city = document.createElement("p");
@@ -83,8 +87,9 @@ function createUserCardBody(user, body){
     city.textContent = `City: ${user.city ?? "n/a"}`;
     company.textContent = `Company Name: ${user.company.name}`;
 
-    body.append(email, phone, city, company);
-    return body;
+    cardBody.append(email, phone, city, company);
+    return cardBody;
+}
 }
 
 function main() {
