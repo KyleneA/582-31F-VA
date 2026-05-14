@@ -12,6 +12,11 @@ function setStatus(p, type, message){
     }
     if (type === "success-post"){
         p.className = "list-group-item text-uppercase bg-info-subtle d-flex justify-content-between";
+
+        const closePosts = document.createElement("button");
+        closePosts.className = "btn-close";
+        closePosts.type = "button";
+        p.appendChild(closePosts);
     }
     if (type === "error"){
         p.className = "text-uppercase text-danger fw-medium fs-5";
@@ -65,18 +70,32 @@ function displayUser(user){
     const postBtn = postList.children[0];
     const postStatus = postList.children[1];
     postBtn.addEventListener("click", () => {
-        setStatus(postStatus, "loading-post", "Loading ...");
         postBtn.disabled = true;
+        
+        if (postList.children.length < 3){
+            setStatus(postStatus, "loading-post", "Loading ...");
+            
+            setTimeout(() => {
+                loadUserPosts(user, postList, postStatus);
+            }, 500);
+        }
+        else{
+            setStatus(postStatus, "success-post", "Posts were loaded successfully!");
 
-        setTimeout(() => {
-            loadUserPosts(user, postList, postStatus);
-        }, 500);
+            for (let i = 2; i < postList.children.length; i++){
+                const post = postList.children[i];
+                post.style = "display: block";
+            }
+        }
     });
 
     postStatus.addEventListener("click", () => {
         if (postStatus.textContent === "ready to load posts") return;
-        postList.innerHTML = "";
-        postList.append(postBtn, postStatus);
+        
+        for (let i = 2; i < postList.children.length; i++){
+            const post = postList.children[i];
+            post.style = "display: none";
+        }
 
         setStatus(postStatus, "clear-post", "Ready to load users");
         
@@ -141,11 +160,6 @@ function loadUserPosts(user, ul, postStatus){
             displayUserPosts(userPosts, ul);
 
             setStatus(postStatus, "success-post", "Posts were loaded successfully!");
-
-            const closePosts = document.createElement("button");
-            closePosts.className = "btn-close";
-            closePosts.type = "button";
-            postStatus.appendChild(closePosts);
         })
         .catch((error) => {
             setTimeout(() => {
@@ -155,7 +169,7 @@ function loadUserPosts(user, ul, postStatus){
         });
 }
 
-function displayUserPosts(userPosts, ul, closePosts){
+function displayUserPosts(userPosts, ul){
 
     for (const post of userPosts){
         if (ul.children.length > 4) return;
