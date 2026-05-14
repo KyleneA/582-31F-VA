@@ -1,18 +1,35 @@
 function setStatus(p, type, message){
     p.textContent = message;
+    const userSpinner = document.createElement("div");
+    const postSpinner = document.createElement("div");
 
     if (type === "loading"){
-        p.className = "text-uppercase text-primary fw-medium fs-5";
+        p.className = "text-uppercase text-primary fw-medium fs-5 d-flex gap-2";
+
+        userSpinner.innerHTML = `
+        <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>`;
+        p.appendChild(userSpinner);
+
     }
     if (type === "loading-post"){
-        p.className = "list-group-item text-uppercase text-primary";
+        p.className = "list-group-item text-uppercase text-primary d-flex gap-2";
+
+        postSpinner.innerHTML = `
+        <div class="spinner-grow spinner-grow-sm text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>`;
+        p.appendChild(postSpinner);
     }
     if (type === "success"){
         p.className = "text-uppercase fw-medium fs-5";
+        userSpinner.remove();
     }
     if (type === "success-post"){
         p.className = "list-group-item text-uppercase bg-info-subtle d-flex justify-content-between";
-
+        postSpinner.remove();
+        
         const closePosts = document.createElement("button");
         closePosts.className = "btn-close";
         closePosts.type = "button";
@@ -20,9 +37,11 @@ function setStatus(p, type, message){
     }
     if (type === "error"){
         p.className = "text-uppercase text-danger fw-medium fs-5";
+        userSpinner.remove();
     }
     if (type === "error-post"){
         p.className = "list-group-item text-uppercase bg-danger-subtle";
+        postSpinner.remove();
     }
     if (type === "clear"){
         p.className = "text-uppercase fw-medium fs-5 text-success";
@@ -176,6 +195,7 @@ function loadUserPosts(user, ul, postStatus){
             return response.json();
         })
         .then((posts) => {
+            // Not sure if this does what challenge 4 asks
             const userPosts = posts.filter(post => post.userId === user.id);
             displayUserPosts(userPosts, ul);
 
