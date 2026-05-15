@@ -116,7 +116,7 @@ function displayUser(user){
             
             setTimeout(() => {
                 loadUserPosts(user, postList, postStatus);
-            }, 500);
+            }, 1000);
         }
         else{
             setStatus(postStatus, "success-post", "Posts were loaded successfully!");
@@ -145,7 +145,7 @@ function displayUser(user){
 
 function createUserCard(user){
     const card = document.createElement("div");
-    card.className = "card mb-2 p-0";
+    card.className = "card mb-3 p-0";
     
     const cardHeader = document.createElement("div");
     cardHeader.className = "card-header fs-6 fw-medium";
@@ -235,6 +235,7 @@ function main() {
     const clearBtn = document.getElementById("clear-btn");
     const cardsHolder = document.getElementById("cards-holder");
     const statusP = document.getElementById("status");
+    const searchUsers = document.querySelector(".search-users");
     
     loadBtn.addEventListener("click", () => {
         setStatus(statusP, "loading", "loading...");
@@ -252,6 +253,8 @@ function main() {
         setStatus(statusP, "clear", "Ready to load users");
         
         clearBtn.disabled = true;
+        loadBtn.disabled = false;
+        searchUsers.style = "display: none;";
     })
 }
 
