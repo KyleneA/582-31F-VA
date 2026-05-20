@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Modular User Viewer</title>
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+    <main>
+        <section class="code-along">
+            <h1>Modular User Viewer</h1>
+            <p id="status">Click the button to load users.</p>
+            <div class="btns-holder">
+                <button id="load-users-btn">Load Users</button>
+                <button id="clear-btn">Clear</button>
+            </div>
+            <div id="users-container"></div>
+        </section>
+
+        <section class="reflection">
+            <h2> Reflection </h2>
+            <ol>
+                <li>
+                    What is the purpose of type="module" in HTML?
+                    <ul style="margin-bottom: 5px;">
+                        <li>
+                            The type module attribute for the script tag in HTML tells the browser that the script that will be loaded is a module
+                        </li>
+                        <li>
+                            Also tells the browser that the script code should only be executed after the entirety of the HTML is parsed
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Why is it useful to separate fetchUsers() into api.js?
+                    <ul style="margin-bottom: 5px;">
+                        <li>
+                            It allows us to separate the parsing of the response from the execution of the promise once fetched, allowing us to more meaningfully separate the steps relating to fetching API data.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Why is it useful to separate rendering into ui.js?
+                    <ul style="margin-bottom: 5px;">
+                        <li>
+                            This allows us to reduce the size of the app.js file while also adding meaningful separation between functions used throughout the program. This can be helpful when debugging.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    What would happen if everything stayed in one file as the project grows?
+                    <ul style="margin-bottom: 5px;">
+                        <li>
+                            As the project becomes more complex, the app.js file will get increasingly larger. This can lead to the file being less readable, harder to navigate, and harder to debug.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    What is the difference between exporting and importing?
+                    <ul style="margin-bottom: 5px;">
+                        <li>
+                            <em>Exporting</em> allows us to create code (functions, variables, or classes) that we can use and reuse in other files in the project. 
+                            
+                            <ul>
+                                <li>
+                                    It tells JS that the code can be used elsewhere.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <em>Importing</em> what allows us to use the code we created (functions, variables, or classes) in another file in a different file. 
+                            <ul>
+                                <li>
+                                    It tells JS that we want to use the code from the other file in the current one.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    
+</body>
+</html>
