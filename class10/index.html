@@ -7,6 +7,53 @@
     <script type="module" src="./notes/notes.js"></script>
 </head>
 <body>
-    
+    <main>
+        <section class="demo">
+            <h1>Book Prototype Demo</h1>
+            <button id="run-demo-btn">Run Demo</button>
+            <div id="output"></div>
+        </section>
+
+        <hr>
+
+        <section class="reflection">
+            <h2>Reflection Qs</h2>
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>What problem do prototypes solve?</h3>
+                <p>Prototypes allows us to centralize the methods and properties that are shared between several objects. It allows us to reduce repetition by only needing to write the code for the method or property once. </p>
+            </div>
+            
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>What is the difference between an own property and a prototype method?</h3>
+                <p>The prototype method and prototype property are automatically applied to all instances of the object using the construction function. On the other hand, own properties are unique to the object instance and do not affect other instances of the object created with the constructor.</p>
+            </div>
+            
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>Where does JavaScript look if a method is not found directly on an object?</h3>
+                <p>It looks to the prototype of the object.</p>
+            </div>
+
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>Why is book1.displayInfo === book2.displayInfo useful evidence?</h3>
+                <p>This code demonstrates that both the methods are the exact same in both value and type (strict equality).</p>
+            </div>
+            
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>What happened when you changed book1.category?</h3>
+                <p>It created a shadow of the prototype property.</p>
+            </div>
+            
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>Why is it better to put shared behavior on the prototype instead of inside every object?</h3>
+                <p>It reduces the possibility of introducing bugs during coding and helps reduce the size of the file.</p>
+            </div>
+            
+            <div style="padding: 10px 20px; border: 1px solid black; margin-bottom: 20px;">
+                <h3>Challenge 3: Explain what changed before and after setting book2.genre = 'Romance';</h3>
+                <p>Until the I changed the genre for book2, it did not have it's own genre property because it is a shared property from the prototype. Once changed, the genre property became its own.</p>
+            </div>
+        </section>
+
+    </main>
 </body>
 </html>
