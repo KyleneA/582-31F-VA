@@ -13,6 +13,53 @@
         <h1>Vehicle Inheritance Demo</h1>
         <button id="run-demo-btn">Run Demo</button>
         <div id="output"></div>
+
+        <section class="reflection">
+            <ol>
+                <li>
+                    What is inheritance?
+                    <ul>
+                        <li> Inheritance allows us to reuse specified behaviour and structure across different object types. </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Why do we use Animal.call(this, name) or Vehicle.call(this, brand) in child constructors?
+                    <ul>
+                        <li> This calls/runs the parent constructor for the child prototype. </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Why do we use Object.create(...)?
+                    <ul>
+                        <li> This connects the child prototype to the parent prototype and allows the child to access the parent methods. </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Why do we reset the constructor property?
+                    <ul>
+                        <li> Not too sure. But I think it might be to ensure that the child prototype uses its own constructor rather than the one inherited from parent. </li>
+                    </ul>
+                </li>
+
+                <li>
+                    What is the difference between inherited methods and child-specific methods?
+                    <ul>
+                        <li> Parent methods are accessible by all types that are children of the parent. </li>
+                        <li> Child-specific methods are only accessible by that specific child and its own children but not other children. </li>
+                    </ul>
+                </li>
+
+                <li>
+                    How does class ... extends ... relate to prototypes?
+                    <ul>
+                        <li> I believe it connects the current class to the specified parent and that parent's methods. </li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
     </main>
 </body>
 </html>
