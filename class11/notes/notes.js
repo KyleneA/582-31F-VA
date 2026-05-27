@@ -4,8 +4,11 @@ export function Animal(name) { // parent constructor function
 
 // Parent prototype method
 Animal.prototype.describe = function () {
-    return `This animal is named ${this.name}`; 
+    return `This animal is named ${this.name} from the ${this.kingdom} kingdom`; 
 };
+
+// Parent Property
+Animal.prototype.kingdom = "Animalia";
 
 export function Dog(name, breed) {
     Animal.call(this, name); // runs parent constructor for Dog object
