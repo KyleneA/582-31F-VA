@@ -25,7 +25,45 @@
             </div>
         </section>
 
+        <section class="reflection" id="reflection">
+            <h2>Reflection</h2>
+            <ol>
+                <li>
+                    What is the purpose of try/catch?
+                    <ul>
+                        <li>To set up a flow that will take an error that would essentially break the program and do something different to indicate what the error is without breaking the program.</li>
+                    </ul>
+                </li>
 
+                <li>
+                    What does throw new Error(...) do?
+                    <ul>
+                        <li>When it runs, it creates a new error with the message being what is between the "()". This new error will then get caught by the catch and execute the code within the catch.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Why do we check response.ok in fetch code?
+                    <ul>
+                        <li>To establish whether or not the fetch was successful or not. This would allow us to throw an error if it was not and set up a new flow to handle this error.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    What is the difference between sync error handling and Promise .catch()?
+                    <ul>
+                        <li>Synchronous error handling with catch occur in chronological order while the promise .catch() is asynchronous and only executes once the promise is resolved.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    What is finally useful for?
+                    <ul>
+                        <li>It is code that will always run whether the try successeds or not. It is good to reset UI elements in the page to a neutral state.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
     </main>
 </body>
 </html>
