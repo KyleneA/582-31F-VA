@@ -14,10 +14,17 @@
             <div class="container">
                 <h1>Post Loader</h1>
 
-                <div class="input-holder">
-                    <input type="number" id="post-id-input" placeholder="Enter post ID" />
-                    <button id="load-post-btn">Load Post</button>
-                    <button id="clear-post-btn" disabled>Clear Post</button>
+                <div class="holder" style="display: flex; justify-content: space-between;">
+                    <div class="posts">
+                        <input type="number" id="post-id-input" placeholder="Enter post ID" />
+                        <button id="load-post-btn">Load Post</button>
+                    </div>
+                    <div class="clear">
+                        <button id="clear-post-btn" disabled>Clear</button>
+                    </div>
+                    <div class="comments">
+                        <button id="comments-btn">Load Comments</button>
+                    </div>
                 </div>
 
                 <p id="status">Click the button to load a post.</p>

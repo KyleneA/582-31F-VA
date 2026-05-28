@@ -32,18 +32,21 @@ loadPostBtn.addEventListener("click", () => {
                 })
                 .catch((error) => {
                     statusP.textContent = `Failed to load post: ${error.message}`;
+                    statusP.style = "color: crimson; font-weight: 700;";
             }).finally(() => {
                 console.log("Request finished");
             });
         }
     } catch (error) {
         statusP.textContent = "Failed to load... " + error.message;
+        statusP.style = "color: crimson; font-weight: 700;";
         return;
     } finally{
         console.log("Request finished");
         setTimeout(() => {
             input.value = "";
             statusP.textContent = "Click the button to load a post.";
+            statusP.style = "color: black; font-weight: 400;";
             loadPostBtn.disabled = false; 
         }, 3000);
     };
@@ -69,5 +72,56 @@ try {
     console.log(error.message);
 }
 
-console.log("----- Independent Tasks -----");
+console.log("----- Challenge Tasks -----");
 
+try {
+    const result = JSON.parse("{ name Alice }");
+    console.log(result);
+} catch (error) {
+    console.log("JSON parsing failed");
+    console.log(error.message);
+}
+
+const loadCommentBtn = document.getElementById("comments-btn");
+
+loadCommentBtn.addEventListener("click", () => {
+    statusP.textContent = "Loading comments...";
+    output.innerHTML = "";
+    loadCommentBtn.disabled = true;
+
+    try{
+        fetch(`https://jsonplaceholder.typicode.com/comments/1`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((comment) => {
+                output.innerHTML = `
+                    <h2>${comment.title}</h2>
+                    <p>${comment.body}</p>
+                `;
+                statusP.textContent = "Comment loaded successfully.";
+                clearPostBtn.disabled = false;
+            })
+            .catch((error) => {
+                statusP.textContent = `Failed to load comment: ${error.message}`;
+                statusP.style = "color: crimson; font-weight: 700;";
+        }).finally(() => {
+            console.log("Request finished");
+        });
+    } catch (error) {
+        statusP.textContent = "Failed to load... " + error.message;
+        statusP.style = "color: crimson; font-weight: 700;";
+        return;
+    } finally{
+        console.log("Request finished");
+        setTimeout(() => {
+            input.value = "";
+            statusP.textContent = "Click the button to load a comment.";
+            statusP.style = "color: black; font-weight: 400;";
+            loadCommentBtn.disabled = false; 
+        }, 3000);
+    };
+})
