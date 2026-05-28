@@ -1,6 +1,7 @@
 console.log("===== Guided Build =====");
 
 const loadPostBtn = document.getElementById("load-post-btn");
+const clearPostBtn = document.getElementById("clear-post-btn");
 const statusP = document.getElementById("status");
 const output = document.getElementById("output");
 const input = document.getElementById("post-id-input");
@@ -27,6 +28,7 @@ loadPostBtn.addEventListener("click", () => {
                         <p>${post.body}</p>
                     `;
                     statusP.textContent = "Post loaded successfully.";
+                    clearPostBtn.disabled = false;
                 })
                 .catch((error) => {
                     statusP.textContent = `Failed to load post: ${error.message}`;
@@ -46,6 +48,11 @@ loadPostBtn.addEventListener("click", () => {
         }, 3000);
     };
 });
+
+clearPostBtn.addEventListener("click", () => {
+    output.innerHTML = "";
+    clearPostBtn.disabled = true;
+})
 
 function validatePostId(id){
     if (typeof id !== "number" || id <= 0){
