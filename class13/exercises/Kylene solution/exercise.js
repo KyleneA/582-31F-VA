@@ -7,7 +7,7 @@ class Book{
     }
 
     static isValidPageCount(value){
-        if (value < 0) return false;
+        if (value < 0 || typeof value !== "number") return false;
         else return true; 
     }
 
@@ -41,7 +41,7 @@ class BankAccount{
     }
 
     static isValidAmount(amount){
-        if (amount < 0) {
+        if (amount < 0 || typeof value !== "number") {
             return false;
         }
         else return true
@@ -75,7 +75,7 @@ class Course{
     }
     
     set credits(value){
-        if (value > 0) {
+        if (value > 0 && typeof value === "number") {
             this.__credits = value;
         } else {
             throw new Error("Credits cannot be a negative number.")
@@ -107,7 +107,7 @@ class Movie{
     }
 
     static isValidRating(value){
-        if (value < 0 || value > 10) return false;
+        if (value < 0 || value > 10 || typeof value !== "number") return false;
         console.log(value < 0, value > 10, value < 0 || value > 10);
         return true;
     }
