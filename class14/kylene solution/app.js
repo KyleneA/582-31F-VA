@@ -2,9 +2,12 @@ import { fetchTournaments } from "./api.js"
 
 const loadTournamentsBtn = document.getElementById("load-tournaments");
 const tournamentsGrid = document.querySelector(".tournaments-grid");
+const statusP = document.getElementById("status");
 
 loadTournamentsBtn.addEventListener("click", () => {
-    
+    statusP.textContent = "Loading...";
+    statusP.className = "fw-medium text-black";
+
     fetchTournaments()
         .then((tournaments) => {
             for (const tournament of tournaments) {
@@ -13,6 +16,9 @@ loadTournamentsBtn.addEventListener("click", () => {
                 tournamentsGrid.appendChild(TournamentCard);
             }
         })
+    
+    statusP.textContent = "Tournaments loaded successfully";
+    statusP.className = "fw-medium text-capitalize text-primary";
 })
 
 function renderTournamentCard(tournament){
