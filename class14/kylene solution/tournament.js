@@ -35,6 +35,10 @@ export class Tournament{
         const maxPlayers = data.maxPlayers;
         const registeredPlayers = data.registeredPlayers;
         const status = data.status;
+
+        if (!id){
+            throw new Error("Tournament instance was not created. Invalid data.")
+        }
         
         return new this(id, name, game, entryFee, maxPlayers, registeredPlayers, status);
     }

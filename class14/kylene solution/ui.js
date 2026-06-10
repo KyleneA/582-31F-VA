@@ -160,9 +160,13 @@ function renderSummary(relatedRegistrations, tournament){
     expectedRevenue.textContent = "Expected revenue: $" + revenue;
     
     const spotsLeft = document.createElement("p");
-    const tournamentClass = Tournament.fromObject(tournament);
-    const spots = tournamentClass.spotsLeft;
-    spotsLeft.textContent = "Spots left: " + spots;
+    try{
+        const tournamentClass = Tournament.fromObject(tournament);
+        const spots = tournamentClass.spotsLeft;
+        spotsLeft.textContent = "Spots left: " + spots;
+    } catch(error) {
+        console.log(error);
+    }
     
     summaryLi.append(totalRegistrations, totalConfirmed, expectedRevenue, spotsLeft);
 
