@@ -10,6 +10,9 @@ export function tournamentStatusUi(type, statusP){
     } else if (type === "error") {
         statusP.textContent = "Tournaments failed to load.";
         statusP.className = "list-group-item fw-medium text-uppercase text-danger";
+    } else {
+        statusP.textContent = "ready to load";
+        statusP.className = "list-group-item fw-medium text-uppercase text-success";
     }
 }
 
