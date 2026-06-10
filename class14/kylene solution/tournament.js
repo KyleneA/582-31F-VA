@@ -1,11 +1,11 @@
-class Tournament{
+export class Tournament{
     constructor(id, name, game, entryFee, maxPlayers, registeredPlayers, status){
         this.id = id;
         this.name = name;
         this.game = game;
-        this.entryFee = entryFee;
+        this.entryFee = Number(entryFee);
         this.maxPlayers = maxPlayers;
-        this.registeredPlayers = registeredPlayers;
+        this.registeredPlayers = Number(registeredPlayers);
         this.status = status;
     }
 
@@ -19,11 +19,23 @@ class Tournament{
         } else if (value < this.registeredPlayers) {
             throw new Error("Maximum number of players cannot be smaller than the number of registered players!");
         } else {
-            this.maxPlayers = value;
+            this.__maxPlayers = Number(value);
         }
     }
 
+    get maxPlayers(){
+        return this.__maxPlayers;
+    }
+    
     static fromObject(data) {
-        //will come back to this
+        const id = data.id;
+        const name = data.name;
+        const game = data.game;
+        const entryFee = data.entryFee;
+        const maxPlayers = data.maxPlayers;
+        const registeredPlayers = data.registeredPlayers;
+        const status = data.status;
+        
+        return new this(id, name, game, entryFee, maxPlayers, registeredPlayers, status);
     }
 }

@@ -1,4 +1,5 @@
 import { fetchRegistration } from "./api.js";
+import { Tournament } from "./tournament.js";
 
 export function tournamentStatusUi(type, statusP){
     if (type === "loading") {
@@ -159,7 +160,8 @@ function renderSummary(relatedRegistrations, tournament){
     expectedRevenue.textContent = "Expected revenue: $" + revenue;
     
     const spotsLeft = document.createElement("p");
-    const spots = "";
+    const tournamentClass = Tournament.fromObject(tournament);
+    const spots = tournamentClass.spotsLeft;
     spotsLeft.textContent = "Spots left: " + spots;
     
     summaryLi.append(totalRegistrations, totalConfirmed, expectedRevenue, spotsLeft);
