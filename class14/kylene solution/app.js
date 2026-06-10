@@ -23,9 +23,10 @@ loadTournamentsBtn.addEventListener("click", () => {
                 tournamentStatusUi("success", statusP);
                 tournamentsGrid.style = "display: flex;";
             }, 1000)
-        })
-    
-    
+        }).catch((error) => {
+            console.log(error);
+            tournamentStatusUi("error", statusP);
+        });
 })
 
 function renderTournamentCard(tournament){
@@ -46,7 +47,7 @@ function renderTournamentCard(tournament){
     const gameTitle = document.createElement("h4");
     gameTitle.textContent = tournament.game;
     const entryFee = document.createElement("p");
-    entryFee.textContent = `Entry Fee: ${tournament.entryFee}`;
+    entryFee.textContent = `Entry Fee: $${tournament.entryFee}`;
     const maxPlayers = document.createElement("p");
     maxPlayers.textContent = `Max players: ${tournament.maxPlayers}`;
     const registeredPlayers = document.createElement("p");
@@ -64,7 +65,7 @@ function renderTournamentCard(tournament){
     registrationUl.className = "list-group list-group-flush";
     const registrationBtnStatus = document.createElement("li");
     registrationBtnStatus.textContent = "READY TO LOAD REGISTRATIONS";
-    registrationBtnStatus.className = "list-group-item fw-medium text-success";
+    registrationBtnStatus.className = "list-group-item fw-medium text-success text-center";
     registrationUl.appendChild(registrationBtnStatus);
     cardFooterDiv.append(registrationsBtn, registrationUl);
     
@@ -76,19 +77,26 @@ function renderTournamentCard(tournament){
         registrationStatusUi("loading", registrationBtnStatus);
         
         fetchRegistration()
-        .then((registrations) => {
-            const relatedRegistrations = registrations.filter(related => related.tournamentId === tournamentID);
-            
-            for (const related of relatedRegistrations) {
-                const info = renderRegistration(related);
-                registrationUl.appendChild(info);
-            }
+            .then((registrations) => {
+                const relatedRegistrations = registrations.filter(related => related.tournamentId === tournamentID);
+                
+                registrationUl.appendChild(renderSummary(relatedRegistrations, tournament));
 
-            registrationStatusUi("success", registrationBtnStatus);
-        })
+                for (const related of relatedRegistrations) {
+                    const info = renderRegistration(related);
+                    registrationUl.appendChild(info);
+                }
+
+                registrationStatusUi("success", registrationBtnStatus);
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    console.log(error);
+                    registrationStatusUi("error", registrationBtnStatus);
+                })
+            });
     });
-
-
+    
     return colDiv;
 }
 
@@ -108,4 +116,29 @@ function renderRegistration(related){
     registrationInfo.append(playerName, gamerTag, ticketType, registrationStatus);
 
     return registrationInfo;
+}
+
+function renderSummary(relatedRegistrations, tournament){
+    const summaryLi = document.createElement("li");
+    summaryLi.className = "list-group-item bg-info-subtle";
+    summaryLi.innerHTML = "<p class='fw-medium'> Tournament Summary </p>";
+
+    const totalRegistrations = document.createElement("p");
+    totalRegistrations.textContent = "Total registrations: " + relatedRegistrations.length;
+    
+    const totalConfirmed = document.createElement("p");
+    const confirmed = relatedRegistrations.filter(related => related.status === "confirmed").length;
+    totalConfirmed.textContent = "Total confirmed: " + confirmed;
+    
+    const expectedRevenue = document.createElement("p");
+    const revenue = Number(tournament.entryFee) * confirmed;
+    expectedRevenue.textContent = "Expected revenue: $" + revenue;
+    
+    const spotsLeft = document.createElement("p");
+    const spots = "";
+    spotsLeft.textContent = "Spots left: " + spots;
+    
+    summaryLi.append(totalRegistrations, totalConfirmed, expectedRevenue, spotsLeft);
+
+    return summaryLi;
 }
