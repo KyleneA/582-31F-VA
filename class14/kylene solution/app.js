@@ -1,5 +1,5 @@
 import { fetchTournaments, fetchRegistration } from "./api.js"
-import { tournamentStatusUi } from "./ui.js";
+import { tournamentStatusUi, registrationStatusUi } from "./ui.js";
 
 const loadTournamentsBtn = document.getElementById("load-tournaments");
 const tournamentsGrid = document.querySelector(".tournaments-grid");
@@ -72,20 +72,20 @@ function renderTournamentCard(tournament){
     
     registrationsBtn.addEventListener("click",() => {
         const tournamentID = tournament.id;
-        registrationBtnStatus.textContent = "Loading registrations...";
-        registrationBtnStatus.className = "list-group-item fw-medium text-black";
+
+        registrationStatusUi("loading", registrationBtnStatus);
         
         fetchRegistration()
         .then((registrations) => {
             const relatedRegistrations = registrations.filter(related => related.tournamentId === tournamentID);
             
             for (const related of relatedRegistrations) {
-                registrationUl.appendChild(renderRegistration(related));
+                const info = renderRegistration(related);
+                registrationUl.appendChild(info);
             }
+
+            registrationStatusUi("success", registrationBtnStatus);
         })
-        
-        registrationBtnStatus.textContent = "Registrations loaded successfully";
-        registrationBtnStatus.className = "list-group-item fw-medium text-primary";
     });
 
 
