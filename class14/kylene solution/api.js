@@ -1,5 +1,5 @@
 export function fetchTournaments(){
-    return fetch("/class14/tournaments.json")
+    return fetch("./tournaments.json")
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP ERROR: ${response.status}`);
@@ -9,7 +9,7 @@ export function fetchTournaments(){
 }
 
 export function fetchRegistration(){
-    return fetch("/class14/registrations.json")
+    return fetch("./registrations.json")
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP ERROR: ${response.status}`);
