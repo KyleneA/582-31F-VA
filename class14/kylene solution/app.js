@@ -15,6 +15,7 @@ function main() {
         fetchTournaments()
             .then((tournaments) => {
                 tournamentsGrid.style = "display: none;";
+                tournamentsGrid.innerHTML = "";
                 for (const tournament of tournaments) {
                     const TournamentCard = renderTournamentCard(tournament);
                     
