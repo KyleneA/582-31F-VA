@@ -7,14 +7,14 @@
 
 class MovieCard extends HTMLElement {
     connectedCallback() {
-        this.title = this.getAttribute("title");
-        this.year = this.getAttribute("year");
-        this.rating = this.getAttribute("rating");
+        const title = this.getAttribute("title");
+        const year = this.getAttribute("year");
+        const rating = this.getAttribute("rating");
 
         this.innerHTML = `
             <div>
-                <h2> ${this.title} (${this.year}) </h2>
-                <p> Rating: ${this.rating} </p>
+                <h2> ${title} (${year}) </h2>
+                <p> <strong> Rating: </strong> ${rating} </p>
             </div>
         `;
     }
@@ -78,35 +78,36 @@ class GameCard extends HTMLElement {
         return rating;
     }
 
-    ratingFormatter(){
-        const rating = this.getRating();
-
+    ratingFormatter(rating){
         return `${rating}/10`;
     }
 
-    renderHeading() {
+    renderHeading(title, year) {
         const heading = document.createElement("div");
 
         heading.innerHTML = `
-            <h2> ${this.getTitle()} (${this.getYear()}) </h2>
+            <h2> ${title} (${year}) </h2>
         `;
 
         return heading;
     }
 
-    renderBody() {
+    renderBody(rating) {
         const body = document.createElement("div");
 
         body.innerHTML = `
-            <p> <strong> Rating: </strong> ${this.getRating()} </p>
+            <p> <strong> Rating: </strong> ${rating} </p>
         `;
 
         return body;
     }
 
     render() {
+        const title = this.getTitle();
+        const year = this.getYear();
+        const rating = this.ratingFormatter(this.getRating());
         const card = document.createElement("article")
-        card.append(this.renderHeading(), this.renderBody());
+        card.append(this.renderHeading(title,year), this.renderBody(rating));
         
         this.append(card);
     }
