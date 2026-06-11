@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 15</title>
+    <script type="module" src="./notes/notes.js"></script>
+
+    <style>
+        user-card div{
+            background-color: honeydew;
+            color: darkslategray;
+            border: 1px dashed green;
+            padding: 5px 15px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <h1>Experimenting with custom elements</h1>
+
+                <hello-box></hello-box>
+                
+                <br>
+
+                <user-card name="Joe" role="something"></user-card>
+
+                <br>
+
+                <course-info
+                    title="name of course"
+                    credits="3"
+                    instructor="teacher"
+                ></course-info>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

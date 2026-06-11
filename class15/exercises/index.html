@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Elements Exercises</title>
+
+    <script type="module" src="./script.js"></script>
+
+    <style>
+      movie-card div{
+        padding: 10px 20px;
+        background-color: lemonchiffon;
+        border: 1px dashed goldenrod;
+        margin-bottom: 20px;
+      }
+      
+      hello-box div{
+        padding: 10px 20px;
+        background-color: honeydew;
+        border: 1px dashed forestgreen;
+        margin-bottom: 20px;
+      }
+      
+      game-card article{
+        padding: 10px 20px;
+        background-color: azure;
+        border: 1px dashed navy;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="movie">
+        <h1>Movies</h1>
+        <movie-card
+          title="Movie 1"
+          year="2006"
+          rating="8"
+        ></movie-card>
+        
+        <movie-card
+          title="Movie 2"
+          year="2026"
+          rating="10"
+        ></movie-card>
+      </section>
+
+      <section class="hello">
+        <hello-box></hello-box>
+      </section>
+
+      <section class="game">
+        <game-card
+          title="Game 1"
+          year="2025"
+          rating="8"
+        ></game-card>
+        
+        <game-card
+          title="Game 2"
+          year="2026"
+          rating="9"
+        ></game-card>
+      </section>
+    </main>
+  </body>
+</html>
