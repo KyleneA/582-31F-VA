@@ -83,7 +83,7 @@ class MovieBox extends HTMLElement {
                         <p> ${year} </p>
                     </div>
                     <div class='entry'>
-                        <p class='name'> Directed by: </p> 
+                        <p class='entry-name'> Directed by: </p> 
                         <p> ${director} </p>
                     </div>
                 </div>
