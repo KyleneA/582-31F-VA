@@ -22,8 +22,17 @@ class MovieBox extends HTMLElement {
         const posterURL = this.getAttribute("poster-url") || "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png"
         return posterURL;
     }
+
+    getPosterAltText(title, posterURL){
+        const defaultImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1920px-No-Image-Placeholder.svg.png"
+        if (posterURL === defaultImage) {
+            return 'Placeholder movie poster';
+        } else {
+            return `${title} movie poster`;
+        }
+    }
     
-    renderStyle(title, year, director, posterURL){
+    renderStyle(){
         return `
             <style>
                 .movie-card{
@@ -39,32 +48,16 @@ class MovieBox extends HTMLElement {
                     height: 200px;
                 }
                 
-                .card-header .entry{
+                .movie-card .card-header .entry{
                     display: flex;
                     gap: 10px;
                 }
 
-                .card-header .name{
+                .movie-card .card-header .entry .entry-name{
                     font-weight: 700;
                 }
                 
             </style>
-
-            <div class='movie-card'>
-                <img src=${posterURL} alt=${title} movie poster>
-
-                <div class='card-header'>
-                    <h2> ${title} </h2>
-                    <div class='entry'> 
-                        <p class='name'> Release year: </p> 
-                        <p> ${year} </p>
-                    </div>
-                    <div class='entry'>
-                        <p class='name'> Directed by: </p> 
-                        <p> ${director} </p>
-                    </div>
-                </div>
-            </div>
         `
     }
 
@@ -72,12 +65,29 @@ class MovieBox extends HTMLElement {
         const title = this.getTitle();
         const year = this.getYear();
         const director = this.getDirector();
-        const poster = this.getPosterURL();
+        const posterURL = this.getPosterURL();
+        const posterAltText = this.getPosterAltText(title, posterURL);
 
         const movieBox = this.attachShadow({mode: "open"});
-        movieBox.innerHTML = this.renderStyle(title, year, director, poster);
+        
+        movieBox.innerHTML = `
+            ${this.renderStyle(title, year, director, posterURL)}
+            
+            <div class='movie-card'>
+                <img src=${posterURL} alt=${posterAltText}>
 
-        return movieBox;
+                <div class='card-header'>
+                    <h2> ${title} </h2>
+                    <div class='entry'> 
+                        <p class='entry-name'> Release year: </p> 
+                        <p> ${year} </p>
+                    </div>
+                    <div class='entry'>
+                        <p class='name'> Directed by: </p> 
+                        <p> ${director} </p>
+                    </div>
+                </div>
+            </div>`;
     }
 }
 
