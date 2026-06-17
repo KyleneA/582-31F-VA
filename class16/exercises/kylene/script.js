@@ -42,21 +42,22 @@ class MovieBox extends HTMLElement {
                     display: flex;
                     gap: 20px;
                     margin-bottom: 20px;
-                }
 
-                .movie-card img{
-                    height: 200px;
-                }
+                    img{
+                        height: 200px;
+                    }
                 
-                .movie-card .card-header .entry{
-                    display: flex;
-                    gap: 10px;
+                    .card-header {
+                        .entry{
+                            display: flex;
+                            gap: 10px;
+                            
+                            .entry-name{
+                                font-weight: 700;
+                            }
+                        }
+                    }
                 }
-
-                .movie-card .card-header .entry .entry-name{
-                    font-weight: 700;
-                }
-                
             </style>
         `
     }
