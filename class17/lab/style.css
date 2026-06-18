@@ -33,6 +33,22 @@ section {
             text-align: center;
             padding: 10px;
             margin-bottom: 10px;
+
+            p {
+                color: darkgreen;
+            }
+
+            p.loading {
+                color: black;
+            }
+
+            p.success {
+                color: mediumblue;
+            }
+
+            p.error {
+                color: crimson;
+            }
         }
 
         .buttons-area {
