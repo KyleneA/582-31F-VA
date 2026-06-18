@@ -47,6 +47,11 @@ section {
                 font-weight: 700;
                 border-radius: 20px;
                 background-color: cornsilk;
+                
+            }
+
+            button:hover {
+                background-color: beige;
             }
         }
     }

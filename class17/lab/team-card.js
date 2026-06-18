@@ -67,6 +67,11 @@ class TeamCard extends HTMLElement {
                             border-radius: 20px;
                             color: aliceblue;
                         }
+
+                        button:hover {
+                            background-color: honeydew;
+                            color: black;
+                        }
                     }
                 }
             </style>
