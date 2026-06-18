@@ -1,4 +1,4 @@
-class Team {
+export default class Team {
     constructor(id, name, group, points, played, goalDifference){
         this.__id = id;
         this.__name = name;
@@ -20,9 +20,20 @@ class Team {
         }
     }
 
-    // Might not be necessary
     get points() {
         return this.__points;
+    }
+
+    get id() {
+        return this.__id;
+    }
+
+    get name() {
+        return this.__name;
+    }
+
+    get group() {
+        return this.__group;
     }
 
     static fromObject(data) {
