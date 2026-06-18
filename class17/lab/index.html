@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Cup Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1> World Cup Dashboard </h1>
+                <p> Click the "Load Teams" button to display information relating to the teams playing in the World Cup. </p>
+            </div>
+        </section>
+
+        <section class="selected-team-display" id="selected-display">
+            <div class="container">
+                <h2> Team Spotlight </h2>
+                <div class="team-details-container">
+                    <h3>No team selected yet</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="teams-display">
+            <div class="container">
+                <div class="loader-container">
+                    <div class="status-area">
+                        <p id="status"> Ready to load teams </p>
+                    </div>
+                    <div class="buttons-area">
+                        <button class="load-btn" id="load-btn"> Load Teams </button>
+                        <button class="clear-btn" id="clear-btn"> Clear </button>
+                    </div>
+                </div>
+    
+                <div class="teams-container" id="teams-container">
+                    <h2>Teams</h2>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
