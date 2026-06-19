@@ -1,16 +1,17 @@
 export function renderTeams(teams, container) {
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        for (const team of teams) {
+    console.log(typeof teams);
+    for (const team of teams) {
 
-            const teamCard = document.createElement("team-card");
-            const keys = Object.keys(team);
+        const teamCard = document.createElement("team-card");
 
-            for (const keyName of keys) {
-                teamCard.setAttribute(keyName.startsWith("__") ? keyName.substring(2) : keyName, team[keyName]);
-            }
+        const keys = Object.keys(team);
 
-            container.appendChild(teamCard);
+        for (const keyName of keys) {
+            teamCard.setAttribute(keyName.startsWith("__") ? keyName.substring(2) : keyName, team[keyName]);
         }
 
+        container.appendChild(teamCard);
+    }
 }

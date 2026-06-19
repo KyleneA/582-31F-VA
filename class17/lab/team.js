@@ -37,16 +37,15 @@ export default class Team {
     }
 
     static fromObject(data) {
-        const parsedData = JSON.parse(data);
-        const id = parsedData.id || undefined;
-        const name = parsedData.name || undefined;
-        const group = parsedData.group || undefined;
-        const points = parsedData.points || undefined;
-        const played = parsedData.played || undefined;
-        const goalDifference = parsedData.goalDifference || undefined;
+        const id = data.id || undefined;
+        const name = data.name || undefined;
+        const group = data.group || undefined;
+        const points = data.points || undefined;
+        const played = data.played || undefined;
+        const goalDifference = data.goalDifference || undefined;
 
         if (!id || !name || !group || !points || !played || !goalDifference){
-            throw new Error("Tournament instance was not created. Invalid data.")
+            throw new Error("Team instance was not created. Invalid data.")
         }
         
         return new this(id, name, group, points, played, goalDifference);

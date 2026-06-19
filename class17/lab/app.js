@@ -1,3 +1,4 @@
+import Team from "./team.js"
 import { fetchTeams } from "./api.js";
 import { renderTeams } from "./ui.js";
 
@@ -19,12 +20,22 @@ function main(){
 
         fetchTeams()
             .then((teams) => {
+                const teamObjs = [];
+
+                for (const team of teams) {
+                    teamObjs.push(Team.fromObject(team));
+                }
+
+                return teamObjs;
+            })
+            .then((teamObjs) => {
                 setTimeout(() => {
                     statusP.textContent = "Success!";
                     statusP.className = "success";
                     clearBtn.disabled = false;
+                    loadTeamsBtn.disabled = true;
                     
-                    renderTeams(teams, teamsContainer);
+                    renderTeams(teamObjs, teamsContainer);
                 }, 1000);
             })
             .catch((error) => {
@@ -35,16 +46,17 @@ function main(){
                     
                     renderTeams(teams, teamsContainer);
                 }, 500);
-
+                
             });
-    });
+        });
+        
+        clearBtn.addEventListener("click", () => {
+            statusP.textContent = "Ready to load teams";
+            statusP.className = "";
+            loadTeamsBtn.disabled = false;
 
-    clearBtn.addEventListener("click", () => {
-        statusP.textContent = "Ready to load teams";
-        statusP.className = "";
-
-        teamsContainer.innerHTML = "";
-        spotlightTeam.innerHTML = `<h3>No team selected yet</h3>`;
+            teamsContainer.innerHTML = "";
+            spotlightTeam.innerHTML = `<h3>No team selected yet</h3>`;
     });
 
 }
