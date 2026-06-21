@@ -14,6 +14,7 @@ function main(){
     // Selected display
     const spotlightTeam = document.getElementById("team-details-container");
 
+    // Event Listeners
     loadTeamsBtn.addEventListener("click", () => {
         statusP.textContent = "Loading...";
         statusP.className = "loading";
@@ -30,7 +31,7 @@ function main(){
             })
             .then((teamObjs) => {
                 setTimeout(() => {
-                    statusP.textContent = "Success!";
+                    statusP.textContent = "Teams loaded successfully!";
                     statusP.className = "success";
                     clearBtn.disabled = false;
                     loadTeamsBtn.disabled = true;
@@ -42,22 +43,26 @@ function main(){
                 setTimeout(() => {
                     statusP.textContent = `Failed to load teams.  (${error})`;
                     statusP.className = "error";
-                    clearBtn.disabled = false;
-                    
-                    renderTeams(teams, teamsContainer);
+                    clearBtn.disabled = false;                    
                 }, 500);
                 
             });
     });
         
     clearBtn.addEventListener("click", () => {
-        statusP.textContent = "Ready to load teams";
+        statusP.textContent = "Dashboard cleared";
         statusP.className = "";
         loadTeamsBtn.disabled = false;
-
+        
         teamsContainer.innerHTML = "";
-        spotlightTeamCard.innerHTML = "";
+        spotlightTeam.innerHTML = "";
+        const spotlightTeamH3 = document.createElement("h3");
         spotlightTeamH3.textContent ="No team selected yet";
+        spotlightTeam.append(spotlightTeamH3);
+
+        setTimeout(() => {
+            statusP.textContent = "Ready to load teams";
+        }, 1000);
     });
 
     document.addEventListener("addTeamDetails", (e) => {
