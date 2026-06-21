@@ -93,6 +93,10 @@ class TeamCard extends HTMLElement {
                         }
                     }
                 }
+                
+                .leaders {
+                    background-color: deepskyblue;
+                }
             </style>
         `;
     }
@@ -156,7 +160,13 @@ class TeamCard extends HTMLElement {
         const teamCard = this.attachShadow({mode: "open"});
         
         const cardDiv = document.createElement("div");
-        cardDiv.className = "card";
+        if (points >= 5) {
+            cardDiv.className = "card leaders";
+            console.log("leaders");
+        } else {
+            cardDiv.className = "card";
+            console.log("else");
+        }
         
         const cardHeader = this.createCardHeader(name, group);
         
