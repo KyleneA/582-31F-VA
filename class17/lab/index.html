@@ -16,21 +16,12 @@
                 <p> Click the "Load Teams" button to display information relating to the teams playing in the World Cup. </p>
             </div>
         </section>
-
-        <section class="selected-team-display" id="selected-display">
-            <div class="container">
-                <h2> Team Spotlight </h2>
-                <div class="team-details-container">
-                    <h3>No team selected yet</h3>
-                </div>
-            </div>
-        </section>
-
+        
         <section class="teams-display">
             <div class="container">
                 <div class="loader-container">
                     <h2>Teams</h2>
-
+                    
                     <div class="status-area">
                         <p id="status"> Ready to load teams </p>
                     </div>
@@ -40,12 +31,22 @@
                         <button class="clear-btn" id="clear-btn" disabled> Clear </button>
                     </div>
                 </div>
-    
+                
                 <div class="teams-container" id="teams-container"></div>
             </div>
         </section>
+        
+        <section class="selected-team-display" id="selected-display">
+            <div class="container">
+                <h2> Team Spotlight </h2>
+                <div id="team-details-container">
+                    <h3 id="selected-team-name">No team selected yet</h3>
+                    <team-card id="team-details-card"></team-card>
+                </div>
+            </div>
+        </section>
     </main>
-
+    
     <script src="team-card.js"></script>
 </body>
 </html>

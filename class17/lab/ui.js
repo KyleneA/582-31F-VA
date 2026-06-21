@@ -1,7 +1,6 @@
 export function renderTeams(teams, container) {
     container.innerHTML = "";
 
-    console.log(typeof teams);
     for (const team of teams) {
 
         const teamCard = document.createElement("team-card");

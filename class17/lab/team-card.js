@@ -5,8 +5,9 @@ class TeamCard extends HTMLElement {
         const points = this.getPoints();
         const gamesPlayed = this.getGamesPlayed();
         const goalDifference = this.getGoalDifference();
-        
-        this.render(name, group, points, gamesPlayed, goalDifference);
+
+        if (name === "Undefined" && group === "Undefined" && points === "N/A" && gamesPlayed === "N/A" && goalDifference === "N/A") return;
+        else this.render(name, group, points, gamesPlayed, goalDifference);
     }
 
     getName() {
@@ -26,7 +27,7 @@ class TeamCard extends HTMLElement {
     }
 
     getGoalDifference() {
-        return this.getAttribute("goal-difference") || "N/A";
+        return this.getAttribute("goalDifference") || "N/A";
     }
 
     renderStyle() {
@@ -36,6 +37,10 @@ class TeamCard extends HTMLElement {
                     padding: 10px 20px;
                     border: 1px solid black;
                     border-radius: 4px;
+
+                    p {
+                        margin: 0;
+                    }
 
                     .card-header {
                         display: flex;
@@ -47,15 +52,14 @@ class TeamCard extends HTMLElement {
                         h3 {
                             margin: 0;
                         }
-
-                        p {
-                            margin: 0;
-                        }
                     }
 
                     .card-body {
                         display: flex;
-                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        column-gap: 25px;
+                        margin: 5% 0;
                     }
 
                     .card-footer {
@@ -78,29 +82,74 @@ class TeamCard extends HTMLElement {
         `;
     }
 
+    createCardHeader(name, group) {
+        const cardHeader = document.createElement("div");
+        cardHeader.className = "card-header";
+        const headerH3 = document.createElement("h3");
+        headerH3.textContent = name.toUpperCase();
+        const headerP = document.createElement("p");
+        headerP.textContent = `(Group ${group.toUpperCase()})`;
+        cardHeader.append(headerH3, headerP);
+
+        return cardHeader;
+    }
+
+    createCardBody(points, gamesPlayed, goalDifference) {
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
+        const pointsP = document.createElement("p");
+        pointsP.textContent = `${points} Points`;
+        const gamesP = document.createElement("p");
+        gamesP.textContent = `Games played: ${gamesPlayed}`;
+        const goalsP = document.createElement("p");
+        goalsP.textContent = `Goal difference: ${goalDifference}`;
+        cardBody.append(gamesP, goalsP, pointsP);
+
+        return cardBody;
+    }
+
+    createCardFooter(name, group, points, gamesPlayed, goalDifference) {
+        const cardFooter = document.createElement("div");
+        cardFooter.className = "card-footer";
+        const detailsBtn = document.createElement("button");
+        detailsBtn.textContent = "View Details";
+        cardFooter.appendChild(detailsBtn);
+
+        detailsBtn.addEventListener("click", () => {
+            console.log("clicked")
+            const event = new CustomEvent("addTeamDetails", {
+                composed: true,
+                detail: {
+                    name: name,
+                    group: group,
+                    points: points,
+                    gamesPlayed: gamesPlayed,
+                    goalDifference: goalDifference,
+                }
+            });
+            document.dispatchEvent(event);
+        });
+
+        return cardFooter;
+    }
+    
+    
     render(name, group, points, gamesPlayed, goalDifference) {
         const teamCard = this.attachShadow({mode: "open"});
-
-        teamCard.innerHTML = `
-            ${this.renderStyle()}
-
-            <div class="card">
-                <div class="card-header">
-                    <h3> ${name.toUpperCase()} </h3>
-                    <p> (Group ${group.toUpperCase()}) </p>
-                </div>
-
-                <div class="card-body">
-                    <p> ${points} Points </p>
-                    <p> Games played: ${gamesPlayed} </p>
-                    <p> Goal difference: ${goalDifference} </p>
-                </div>
-
-                <div class="card-footer">
-                    <button id="team-${name.toLowerCase()}"> View Details </button>
-            </div>
-        `;
-
+        
+        const cardDiv = document.createElement("div");
+        cardDiv.className = "card";
+        
+        const cardHeader = this.createCardHeader(name, group);
+        
+        const cardBody = this.createCardBody(points, gamesPlayed, goalDifference);
+        
+        const cardFooter = this.createCardFooter(name, group, points, gamesPlayed, goalDifference);
+        
+        cardDiv.append(cardHeader, cardBody, cardFooter);
+        
+        teamCard.innerHTML = this.renderStyle();
+        teamCard.append(cardDiv);
     }
 }
 
