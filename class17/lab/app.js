@@ -70,6 +70,7 @@ function main(){
         spotlightTeamCard.setAttribute("points", e.detail.points);
         spotlightTeamCard.setAttribute("played", e.detail.gamesPlayed);
         spotlightTeamCard.setAttribute("goalDifference", e.detail.goalDifference);
+        spotlightTeamCard.setAttribute("isSelectedDisplay", true);
 
         const spotlightTeamH3 = document.createElement("h3");
         spotlightTeamH3.textContent = `Team ${e.detail.name}`

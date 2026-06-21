@@ -5,9 +5,10 @@ class TeamCard extends HTMLElement {
         const points = this.getPoints();
         const gamesPlayed = this.getGamesPlayed();
         const goalDifference = this.getGoalDifference();
+        const isSelectedDisplay = this.getIsSelectedDisplay();
 
         if (name === "Undefined" && group === "Undefined" && points === "N/A" && gamesPlayed === "N/A" && goalDifference === "N/A") return;
-        else this.render(name, group, points, gamesPlayed, goalDifference);
+        else this.render(name, group, points, gamesPlayed, goalDifference, isSelectedDisplay);
     }
 
     getName() {
@@ -28,6 +29,10 @@ class TeamCard extends HTMLElement {
 
     getGoalDifference() {
         return this.getAttribute("goalDifference") || "N/A";
+    }
+
+    getIsSelectedDisplay() {
+        return this.getAttribute("isSelectedDisplay") || false;
     }
 
     renderStyle() {
@@ -59,22 +64,32 @@ class TeamCard extends HTMLElement {
                         flex-wrap: wrap;
                         justify-content: center;
                         column-gap: 25px;
-                        margin: 5% 0;
+                        margin-top: 5%;
                     }
 
                     .card-footer {
+                        margin-top: 5%;
 
                         button {
                             width: 100%;
                             text-transform: capitalize;
                             background-color: forestgreen;
                             border-radius: 20px;
-                            color: aliceblue;
+                            
+                            a {
+                                display: inline-block;
+                                width: 100%;
+                                text-decoration: none;
+                                color: aliceblue;
+                            }
+                            
+                            a:hover {
+                                color: black;
+                            }
                         }
 
                         button:hover {
                             background-color: honeydew;
-                            color: black;
                         }
                     }
                 }
@@ -112,7 +127,10 @@ class TeamCard extends HTMLElement {
         const cardFooter = document.createElement("div");
         cardFooter.className = "card-footer";
         const detailsBtn = document.createElement("button");
-        detailsBtn.textContent = "View Details";
+        const detailsLink = document.createElement("a");
+        detailsLink.textContent = "View Details";
+        detailsLink.href = "#selected-display";
+        detailsBtn.appendChild(detailsLink);
         cardFooter.appendChild(detailsBtn);
 
         detailsBtn.addEventListener("click", () => {
@@ -134,7 +152,7 @@ class TeamCard extends HTMLElement {
     }
     
     
-    render(name, group, points, gamesPlayed, goalDifference) {
+    render(name, group, points, gamesPlayed, goalDifference, isSelectedDisplay) {
         const teamCard = this.attachShadow({mode: "open"});
         
         const cardDiv = document.createElement("div");
@@ -144,12 +162,18 @@ class TeamCard extends HTMLElement {
         
         const cardBody = this.createCardBody(points, gamesPlayed, goalDifference);
         
-        const cardFooter = this.createCardFooter(name, group, points, gamesPlayed, goalDifference);
-        
-        cardDiv.append(cardHeader, cardBody, cardFooter);
-        
-        teamCard.innerHTML = this.renderStyle();
-        teamCard.append(cardDiv);
+        if (!isSelectedDisplay) {
+            const cardFooter = this.createCardFooter(name, group, points, gamesPlayed, goalDifference);
+            cardDiv.append(cardHeader, cardBody, cardFooter);
+            
+            teamCard.innerHTML = this.renderStyle();
+            teamCard.append(cardDiv);
+        } else {
+            cardDiv.append(cardHeader, cardBody);
+            
+            teamCard.innerHTML = this.renderStyle();
+            teamCard.append(cardDiv);
+        }
     }
 }
 
