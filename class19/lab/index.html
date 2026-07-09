@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <link rel="stylesheet" href="./src/styles/style.css">
+    </head>
+    <body>
+        <main>
+            <section class="banner">
+                <div class="container">
+                    <h1> Festival Lineup Guide </h1>
+                    <p> This is your one stop shop for everything you need to know about the Festival's lineup! </p>
+                </div>
+            </section>
+
+            <section class="lineup-section">
+                <div class="container">
+                    <div class="lineup-status-container">
+                        <button id="lineup-load-btn" class="btn">Load Lineup</button>
+                        <button id="lineup-clear-btn" class="btn" disabled>Clear All</button>
+                        <div id="lineup-load-status" class="status">
+                            <p>Ready to load artist lineup!</p>
+                        </div>
+                    </div>
+    
+                    <template id="artist-card-template">
+                        <article class="artist-card">
+                            <div class="card-header">
+                                <div class="genre-badge">
+                                    Art Pop
+                                </div>
+    
+                                <div class="artist-id">
+                                    001
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="artist-info">
+                                    <h3 class="artist-name">
+                                        Björk
+                                    </h3>
+    
+                                    <p class="artist-country">
+                                        (Iceland)
+                                    </p>
+                                </div>
+
+                                <div class="stage-info">
+                                    <div class="stage">
+                                        <strong> Stage: </strong>
+                                        <p class="artist-stage">
+                                            Main stage
+                                        </p>
+                                    </div>
+    
+                                    <div class="time">
+                                        <strong> Time: </strong>
+                                        <p class="artist-time">
+                                        18:00
+                                    </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button class="btn">View details</button>
+                            </div>
+                        </article>
+                    </template>
+
+                    <div class="output-container">
+                        <div class="artist-lineup-container">...</div>
+                        <div class="artist-details-container">...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script src="./src/app.js"></script>
+    </body>
+</html>

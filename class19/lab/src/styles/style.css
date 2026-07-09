@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    padding: 80px 0;
+}
+
+.container {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: gold;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: rgba(255, 215, 0, 0.6);
+}
+
+.btn:disabled {
+    background-color: rgba(255, 215, 0, 0.4);
+}
+
+.banner {
+    background-color: lemonchiffon;
+    text-align: center;
+
+    h1 {
+        margin-bottom: 30px;
+    }
+}
+
+.lineup-section {
+    .lineup-status-container {
+        border: 1px solid rgba(255, 215, 0, 0.6);
+        padding: 20px;
+        border-radius: 14px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: stretch;
+        margin-bottom: 30px;
+
+        .btn {
+            width: calc(50% - 10px);
+        }
+
+        .status {
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+        }
+    }
+
+    .output-container {
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        .artist-lineup-container {
+            width: 100%;
+        }
+
+        .artist-lineup-container.view-active {
+            width: calc(60% - 15px);
+        }
+    
+        .artist-details-container{
+            display: none;
+        }
+        .artist-details-container.view-active {
+            width: calc(40% - 15px);
+        }
+    }
+
+    .artist-card {
+        border: 1px solid rgba(255, 215, 0, 0.6);
+        padding: 10px;
+        border-radius: 14px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .genre-badge {
+                padding: 10px 15px;
+                border-radius: 10px;
+                background-color: gold;
+                text-transform: capitalize;
+            }
+
+            .artist-id {
+                text-align: right;
+            }
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .artist-info{
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                align-items: end;
+            }
+
+            .stage-info{
+                display: flex;
+                gap: 10px;
+                justify-content: space-around;
+                align-items: end;
+
+                .stage,
+                .time {
+                    display: flex;
+                    gap: 10px;
+                }
+            }
+        }
+
+        .card-footer {
+            .btn {
+                display: inline-block;
+                width: 100%;
+            }
+        }
+    }
+}
