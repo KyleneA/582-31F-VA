@@ -68,18 +68,21 @@ section {
         justify-content: space-between;
         align-items: flex-start;
         
-        .artist-lineup-container {
+        #artist-lineup-container {
             width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
 
-        .artist-lineup-container.view-active {
+        #artist-lineup-container.view-active {
             width: calc(60% - 15px);
         }
     
-        .artist-details-container{
+        #artist-details-container{
             display: none;
         }
-        .artist-details-container.view-active {
+        #artist-details-container.view-active {
             width: calc(40% - 15px);
         }
     }

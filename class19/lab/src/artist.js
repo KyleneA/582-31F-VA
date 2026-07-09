@@ -9,6 +9,14 @@ export default class Artist {
         this.headliner = headliner;
     }
 
+    get id() {
+        return this.__id;
+    }
+
+    get name() {
+        return this.__name;
+    }
+
     get summary() {
         return `${this.__name} (${this.country}) | ${this.genre} | ${this.stage} - ${this.time}`;
     }

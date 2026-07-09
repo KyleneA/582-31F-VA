@@ -4,7 +4,7 @@ class ArtistCard extends HTMLElement {
     }
 
     getArtistData() {
-        const id = this.getAttribute("artist-id");
+        const id = this.getAttribute("artist-id").padStart(3, "0");
         const name = this.getAttribute("name");
         const genre = this.getAttribute("genre");
         const stage = this.getAttribute("stage");
@@ -29,6 +29,7 @@ class ArtistCard extends HTMLElement {
         return `
             <style>
                 .artist-card {
+                    background-color: rgba(255, 215, 0, 0.05);
                     border: 1px solid rgba(255, 215, 0, 0.6);
                     padding: 10px;
                     border-radius: 14px;
@@ -44,10 +45,10 @@ class ArtistCard extends HTMLElement {
                         .genre-badge {
                             padding: 10px 15px;
                             border-radius: 10px;
-                            background-color: gold;
+                            background-color: rgba(255, 215, 0, 0.3);
                             text-transform: capitalize;
-                        }
-            
+                            }
+                            
                         .artist-id {
                             text-align: right;
                         }
@@ -124,7 +125,7 @@ class ArtistCard extends HTMLElement {
         const id = clone.querySelector(".artist-id");
         const headliner = clone.querySelector(".headliner");
         genre.textContent = artistData.genre;
-        id.textContent = artistData.id;
+        id.textContent = `#${artistData.id}`;
         if (artistData.headliner === "true") {
             headliner.classList.add("active");
         }
@@ -147,7 +148,7 @@ class ArtistCard extends HTMLElement {
 
         viewBtn.addEventListener("click", () => {
             
-            const event = new CustomEvent("viewArtistDetails", {
+            const event = new CustomEvent("artist-selected", {
                 composed: true,
                 detail: {
                     id: artistData.id,
