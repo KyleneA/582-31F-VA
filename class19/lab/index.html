@@ -77,7 +77,17 @@
                     </template>
 
                     <div class="output-container">
-                        <div class="artist-lineup-container">...</div>
+                        <div class="artist-lineup-container">
+                            <artist-card
+                                artist-id="100"
+                                name="Bob"
+                                genre="Pop"
+                                stage="Left"
+                                time="20:00"
+                                country="Latvia"
+                                headliner="true"
+                            ></artist-card>
+                        </div>
                         <div class="artist-details-container">...</div>
                     </div>
                 </div>
@@ -85,5 +95,6 @@
         </main>
 
         <script type="module" src="./src/app.js"></script>
+        <script type="module" src="./src/artist-card.js"></script>
     </body>
 </html>
