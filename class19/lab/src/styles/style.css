@@ -107,6 +107,10 @@ section {
             .artist-id {
                 text-align: right;
             }
+
+            .headliner {
+                display: none;
+            }
         }
 
         .card-body {
