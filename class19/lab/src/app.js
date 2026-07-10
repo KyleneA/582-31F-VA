@@ -63,6 +63,19 @@ function main() {
 
         detailsContainer.appendChild(detailsCard);
     });
+
+    clearBtn.addEventListener("click", () => {
+        statusP.textContent = "Ready to load artist lineup!";
+        clearBtn.disabled = true;
+        loadBtn.disabled = false;
+
+        lineupContainer.className = '';
+        detailsContainer.className = '';
+
+
+        lineupContainer.innerHTML = '';
+        detailsContainer.innerHTML = '';
+    });
 }
 
 main();
