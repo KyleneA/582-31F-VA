@@ -65,16 +65,20 @@ function main() {
     });
 
     clearBtn.addEventListener("click", () => {
-        statusP.textContent = "Ready to load artist lineup!";
+        statusP.textContent = "Artist lineup cleared";
         clearBtn.disabled = true;
-        loadBtn.disabled = false;
-
+        
         lineupContainer.className = '';
         detailsContainer.className = '';
-
-
+        
+        
         lineupContainer.innerHTML = '';
         detailsContainer.innerHTML = '';
+        
+        setTimeout(() => {
+            statusP.textContent = "Ready to load artist lineup!";
+            loadBtn.disabled = false;
+        },1500);
     });
 }
 
