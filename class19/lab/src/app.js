@@ -8,12 +8,27 @@ function main() {
 
     const loadBtn = document.getElementById("lineup-load-btn");
     const clearBtn = document.getElementById("lineup-clear-btn");
-    const statusP = document.getElementById("lineup-load-status")
+    const statusP = document.getElementById("lineup-load-status");
+
+    const filterContainer = document.querySelector(".stage-filter-container");
+    const allStages = document.getElementById("all-stages");
+    const mainStage = document.getElementById("main-stage");
+    const riverStage = document.getElementById("river-stage");
+    const nightStage = document.getElementById("night-stage");
+    const gardenStage = document.getElementById("garden-stage");
+
+    const stageFilterBtns = [allStages, mainStage, riverStage, nightStage, gardenStage];
+    const stageFilter = ["All Stages", "Main Stage", "River Stage", "Night Stage", "Garden Stage"];
 
     loadBtn.addEventListener("click", () => {
         lineupContainer.innerHTML = '';
         statusP.textContent = "Loading artist lineup...";
         loadBtn.disabled = true;
+
+        stageFilterBtns.forEach((stageBtn) => {
+            stageBtn.className = "btn";
+        });
+        allStages.className = "btn selected";
 
         fetchArtists('./src/data/artists.json')
             .then((artists) => {
@@ -31,6 +46,8 @@ function main() {
                     statusP.textContent = "Artist lineup has loaded successfully!"
                     renderArtists(artists, lineupContainer);
                     clearBtn.disabled = false;
+
+                    filterContainer.style.display = "flex";
                 }, 1500);
             }).catch((error) => {
                 setTimeout(() => {
@@ -70,6 +87,7 @@ function main() {
         
         lineupContainer.className = '';
         detailsContainer.className = '';
+        filterContainer.style.display = "none";
         
         
         lineupContainer.innerHTML = '';
@@ -79,6 +97,63 @@ function main() {
             statusP.textContent = "Ready to load artist lineup!";
             loadBtn.disabled = false;
         },1500);
+    });
+
+    stageFilterBtns.forEach((stageBtn, index) => {
+        stageBtn.addEventListener(("click"), () => {
+            if (stageBtn.className === "btn selected") {
+                stageBtn.className = "btn";
+                allStages.className = "btn selected";
+
+                fetchArtists('./src/data/artists.json')
+                .then((artists) => {
+                    const artistInstances = [];
+
+                    artists.forEach(artist => {
+                        const newArtist = Artist.fromObject(artist);
+                        
+                        artistInstances.push(newArtist);
+                    });
+
+                    renderArtists(artistInstances, lineupContainer);
+                });
+                return;
+            }
+
+            stageBtn.className = "btn selected";
+
+            const otherStages = stageFilterBtns.filter((stage) => stage !== stageBtn); 
+
+            otherStages.forEach((stageBtn) => {
+                stageBtn.className = "btn";
+            });
+
+            lineupContainer.innerHTML = '';
+
+            fetchArtists('./src/data/artists.json')
+            .then((artists) => {
+                const artistInstances = [];
+
+                artists.forEach(artist => {
+                    if (artist.stage === stageFilter[index]) {
+                        const newArtist = Artist.fromObject(artist);
+    
+                        artistInstances.push(newArtist);
+                    }
+                    else if (stageFilter[index] === "All Stages"){
+                        const newArtist = Artist.fromObject(artist);
+
+                        artistInstances.push(newArtist);
+                    }
+                });
+                renderArtists(artistInstances, lineupContainer);
+            }).catch((error) => {
+                setTimeout(() => {
+                    statusP.textContent = `Artist lineup failed to load. ${error}`;
+                    loadBtn.disabled = false;
+                }, 750);
+            })
+        });
     });
 }
 

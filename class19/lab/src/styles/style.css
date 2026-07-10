@@ -61,6 +61,26 @@ section {
             font-weight: 600;
         }
     }
+    
+    .stage-filter-container {
+        display: none;
+        gap: 20px;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 25px;
+
+        .btn {
+            width: 25%;
+            background-color: lemonchiffon;
+            box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn.selected,
+        .btn:hover {
+            background-color: rgba(255, 215, 0, 0.6);
+        }
+
+    }
 
     .output-container {
         display: flex;
@@ -94,7 +114,7 @@ section {
                 h3 {
                     margin-bottom: 5px;
                 }
-                
+
                 ul {
                     list-style: none;
                 }
