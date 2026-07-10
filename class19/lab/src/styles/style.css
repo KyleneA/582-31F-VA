@@ -76,14 +76,29 @@ section {
         }
 
         #artist-lineup-container.view-active {
-            width: calc(60% - 15px);
+            width: calc(80% - 15px);
         }
     
         #artist-details-container{
             display: none;
         }
         #artist-details-container.view-active {
-            width: calc(40% - 15px);
+            width: calc(20% - 15px);
+            display: flex;
+            padding: 20px;
+            text-align: right;
+
+            .details-card{
+                width: 100%;
+
+                h3 {
+                    margin-bottom: 5px;
+                }
+                
+                ul {
+                    list-style: none;
+                }
+            }
         }
     }
 }

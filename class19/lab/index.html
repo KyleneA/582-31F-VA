@@ -78,7 +78,28 @@
 
                     <div class="output-container">
                         <div id="artist-lineup-container"></div>
-                        <div id="artist-details-container">...</div>
+                        
+                        <template id="details-card-template">
+                            <div class="details-card">
+                                <h3 class="artist-name-id">Name (id) </h3>
+                                <ul>
+                                    <li class="artist-genre">
+                                        Genre
+                                    </li>
+                                    <li class="artist-country">
+                                        country
+                                    </li>
+                                    <li class="artist-stage-headliner">
+                                        stage (headliner)
+                                    </li>
+                                    <li class="artist-time">
+                                        time
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
+                        
+                        <div id="artist-details-container"></div>
                     </div>
                 </div>
             </section>

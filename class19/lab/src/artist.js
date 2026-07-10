@@ -16,11 +16,7 @@ export default class Artist {
     get name() {
         return this.__name;
     }
-
-    get summary() {
-        return `${this.__name} (${this.country}) | ${this.genre} | ${this.stage} - ${this.time}`;
-    }
-
+    
     set headliner(value) {
         if (typeof(value) === "boolean") {
             this.__headliner = value;
@@ -28,6 +24,14 @@ export default class Artist {
             throw new Error("Headliner must be boolean value.")
         }
     }
+
+    get headliner() {
+        return this.__headliner;
+    }
+    
+        get summary() {
+            return `${this.__name} (${this.country}) | ${this.genre} | ${this.stage} - ${this.time}`;
+        }
 
     static fromObject(data) {
         const id = data.id || undefined;
