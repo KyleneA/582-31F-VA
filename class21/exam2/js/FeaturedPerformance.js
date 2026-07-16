@@ -12,16 +12,16 @@ export class FeaturedPerformance extends Performance{
         featured
     ) {
         super(
-            title,
             id,
-            stage,
+            title,
             artist,
+            stage,
+            time,
             ticketPrice,
             ticketsRemaining,
-            time
+            featured
         );
 
-        this.featured = Boolean(featured);
     }
 
     get lineupLabel() {

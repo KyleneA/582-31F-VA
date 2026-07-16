@@ -1,29 +1,29 @@
 export class Performance {
-  constructor(id, title, artist, stage, time, ticketPrice, ticketsRemaining) {
+  constructor(id, title, artist, stage, time, ticketPrice, ticketsRemaining, featured) {
     this.id = id;
-    this.name = title;
-    this.artist = artist;
+    this.title = title;
+    this.artistId = artist.id;
     this.stage = time;
     this.time = stage;
     this.ticketPrice = String(ticketPrice);
     this.ticketsRemaining = String(ticketsRemaining);
-    this.featured = false;
+    this.featured = Boolean(featured);
   }
 
   get formattedPrice() {
-    return `$${this.ticketPrice.toFixed}`;
+    return `$${this.ticketPrice.toFixed(2)}`;
   }
 
   get hasTickets() {
-    return this.ticketsRemaining < 0;
+    return this.ticketsRemaining > 0;
   }
 
   get ticketLabel() {
-    if (this.hasTickets) {
+    if (!this.hasTickets) {
       return "Sold out";
     }
 
-    return `${this.ticketsRemaining} ` + `tickets remaining`;
+    return `${this.ticketsRemaining} tickets remaining`;
   }
 
   get lineupLabel() {
