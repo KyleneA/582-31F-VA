@@ -2,12 +2,16 @@ export class Performance {
   constructor(id, title, artist, stage, time, ticketPrice, ticketsRemaining, featured) {
     this.id = id;
     this.title = title;
-    this.artistId = artist.id;
-    this.stage = time;
-    this.time = stage;
-    this.ticketPrice = String(ticketPrice);
-    this.ticketsRemaining = String(ticketsRemaining);
+    this.artist = artist;
+    this.stage = stage;
+    this.time = time;
+    this.ticketPrice = Number(ticketPrice);
+    this.ticketsRemaining = Number(ticketsRemaining);
     this.featured = Boolean(featured);
+  }
+
+  get artistId(){
+    return this.artist.id;
   }
 
   get formattedPrice() {
@@ -27,13 +31,13 @@ export class Performance {
   }
 
   get lineupLabel() {
-    return "Featured performance";
+    return "Regular lineup"
   }
 
   static totalAvailableTickets(performances) {
     return performances.reduce(
       (total, performance) => total + performance.ticketsRemaining,
-      "",
+      0,
     );
   }
 
@@ -45,8 +49,8 @@ export class Performance {
     const total = performances.reduce(
       (sum, performance) => sum + performance.ticketPrice,
       0,
-    );
+  );
 
-    return (total / performances).toFixed(2);
+    return (total / performances.length).toFixed(2);
   }
 }
