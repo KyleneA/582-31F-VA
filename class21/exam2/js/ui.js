@@ -1,12 +1,12 @@
 import { Performance } from "./Performance.js";
 
-const performanceContainer = document.getElementById("performances");
+const performanceContainer = document.getElementById("performance-list");
 
 const statusOutput = document.getElementById("status");
 
 const performanceCount = document.getElementById("performance-count");
 
-const ticketCount = document.getElementById("available-tickets");
+const ticketCount = document.getElementById("ticket-count");
 
 const averagePrice = document.getElementById("average-price");
 
@@ -46,7 +46,7 @@ export function renderPerformances(performance) {
 
   statusOutput.textContent = "Festival lineup loaded successfully.";
 
-  performanceCount.textContent = performances.length;
+  performanceCount.textContent = performance.length;
 
   ticketCount.textContent = Performance.totalAvailableTickets(performance);
 
