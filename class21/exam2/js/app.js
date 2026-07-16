@@ -44,7 +44,7 @@ async function loadLineup() {
     );
 
     performances = rawPerformanceData.map((item) => {
-      const artist = artists.filter((artist) => artist.id === item.artistId);
+      const artist = artists.find((artist) => artist.id === item.artistId);
 
       if (item.featured) {
         return new FeaturedPerformance(
