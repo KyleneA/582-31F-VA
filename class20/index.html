@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 20 </title>
+
+</head>
+<body>
+    <header>
+        <h1>My Dashboard</h1>
+    </header>
+    <main>
+        <section>
+            <button id="load-events" type="button">
+                Load Events
+            </button>
+            
+            <label for="genre-filter">
+                Filter by genre
+            </label> 
+            <select id="genre-filter" disabled>
+                <option value="">All genres</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Experimental">Experimental</option>
+                <option value="Hip-Hop">Hip-Hop</option>
+            </select>
+            
+            <p id="status">Select “Load Events” to begin.</p>
+            <p>        
+                <strong>Visible events:</strong>        
+                <span id="event-count">0</span>      
+            </p>
+        </section>
+
+        <section id="events">
+        </section>
+        <script type="module" src="app.js"></script>
+    </main>
+</body>
+</html>
