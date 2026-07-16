@@ -25,11 +25,12 @@
           id="search-input"
           type="search"
           placeholder="Performance or artist"
+          disabled
         />
 
         <label for="stage-filter"> Stage </label>
 
-        <select id="stage-filter">
+        <select id="stage-filter" disabled>
           <option value="">All stages</option>
 
           <option value="Main Hall">Main Hall</option>
@@ -40,20 +41,20 @@
         </select>
 
         <label>
-          <input id="tickets-filter" type="checkbox" />
+          <input id="tickets-filter" type="checkbox" disabled/>
 
           Available tickets only
         </label>
 
         <label>
-          <input id="featured-filter" type="checkbox" />
+          <input id="featured-filter" type="checkbox" disabled/>
 
           Featured only
         </label>
 
         <label for="sort-select"> Sort </label>
 
-        <select id="sort-select">
+        <select id="sort-select" disabled>
           <option value="time-asc">Time ascending</option>
 
           <option value="price-asc">Price ascending</option>
@@ -63,7 +64,7 @@
           <option value="artist-asc">Artist A–Z</option>
         </select>
 
-        <button id="reset-filters" type="button">Reset Filters</button>
+        <button id="reset-filters" type="button" disabled>Reset Filters</button>
       </section>
 
       <section class="summary">
@@ -144,6 +145,6 @@
       </article>
     </template>
 
-    <script src="./js/app.js"></script>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>

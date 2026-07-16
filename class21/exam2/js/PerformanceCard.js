@@ -1,9 +1,9 @@
-export class PerformanceCard {
+export class PerformanceCard extends HTMLElement{
     constructor() {
         super();
 
         this._performance = null;
-  
+
         const shadow =
             this.attachShadow({
                 mode: "open"
@@ -107,6 +107,6 @@ export class PerformanceCard {
 }
 
 customElements.define(
-    "performance",
-    PerformanceCard()
+    "performance-card",
+    PerformanceCard
 );
