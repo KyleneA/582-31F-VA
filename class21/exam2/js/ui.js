@@ -32,6 +32,9 @@ export function renderPerformances(performances) {
   if (performances.length === 0) {
     statusOutput.textContent =
     "No performances match " + "the current filters.";
+    performanceCount.textContent = performances.length;
+    ticketCount.textContent = 0;
+    averagePrice.textContent = "$0.00";
     
     return;
   }

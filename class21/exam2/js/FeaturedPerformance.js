@@ -18,10 +18,10 @@ export class FeaturedPerformance extends Performance{
             stage,
             time,
             ticketPrice,
-            ticketsRemaining,
-            featured
+            ticketsRemaining
         );
 
+        this.featured = Boolean(featured);
     }
 
     get lineupLabel() {
