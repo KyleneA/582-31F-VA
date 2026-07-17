@@ -29,7 +29,7 @@ export function renderError(error) {
 export function renderPerformances(performances) {
   performanceContainer.innerHTML = "";
 
-  if (!performances) {
+  if (performances.length === 0) {
     statusOutput.textContent =
     "No performances match " + "the current filters.";
     
@@ -50,6 +50,6 @@ export function renderPerformances(performances) {
 
   ticketCount.textContent = Performance.totalAvailableTickets(performances);
 
-  averagePrice.textContent = Performance.averagePrice(performances);
+  averagePrice.textContent = `$${Performance.averagePrice(performances)}`;
 
 }
