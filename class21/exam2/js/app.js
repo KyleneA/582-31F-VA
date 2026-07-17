@@ -99,10 +99,13 @@ function applyFilters() {
   const sort = sortSelect.value;
 
   let visiblePerformances = performances.filter((performance) => {
+    const performanceTitle = performance.title.toLowerCase();
+    const artistName = performance.artist.artistName.toLowerCase();
+
     const matchesSearch =
       searchTerm === "" ||
-      performance.title.toLowerCase().includes(searchTerm) ||
-      performance.artist.name.toLowerCase().includes(searchTerm);
+      performanceTitle.includes(searchTerm) ||
+      artistName.includes(searchTerm);
 
     const matchesStage = stage === "" || performance.stage === stage;
 
@@ -129,7 +132,7 @@ function applyFilters() {
 
   if (sort === "artist-asc") {
     visiblePerformances.sort((a, b) =>
-      a.artist.name.localeCompare(b.artist.name),
+      a.artist.artistName.localeCompare(b.artist.artistName),
     );
   }
 

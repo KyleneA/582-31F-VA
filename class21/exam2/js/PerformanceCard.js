@@ -56,7 +56,7 @@ export class PerformanceCard extends HTMLElement{
             .querySelector(".artist")
             .textContent =
                 this.performance
-                    .artist.displayLabel;
+                    .artist.artistName;
 
         this.shadowRoot
             .querySelector(".country")
