@@ -3,7 +3,7 @@ export async function getFestivalData() {
 
   const performanceResponse = await fetch("./performances.json");
 
-  const responses = await Promise.all([artistResponse, performanceResponse]);
+  const responses = Promise.all([artistResponse, performanceResponse]);
 
   if (!responses.ok) {
       if (!artistResponse.ok) {
