@@ -1,5 +1,5 @@
 export class Performance {
-  constructor(id, title, artist, stage, time, ticketPrice, ticketsRemaining, featured) {
+  constructor(id, title, artist, stage, time, ticketPrice, ticketsRemaining) {
     this.id = id;
     this.title = title;
     this.artist = artist;
@@ -7,7 +7,6 @@ export class Performance {
     this.time = time;
     this.ticketPrice = Number(ticketPrice);
     this.ticketsRemaining = Number(ticketsRemaining);
-    this.featured = Boolean(featured);
   }
 
   get artistId(){
