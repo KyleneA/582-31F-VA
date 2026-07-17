@@ -84,7 +84,7 @@ async function loadLineup() {
     renderError(error.message);
   }
 
-  loadButton.disabled = true;
+  loadButton.disabled = false;
 }
 
 function applyFilters() {

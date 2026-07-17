@@ -14,7 +14,7 @@ export async function getFestivalData() {
       
       if (!performanceResponse.ok) {
         throw new Error(
-          `Performance data could not be loaded. HTTP status: ${artistResponse.status}`
+          `Performance data could not be loaded. HTTP status: ${performanceResponse.status}`
         );
       }
   }
