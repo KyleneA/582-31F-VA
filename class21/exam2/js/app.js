@@ -142,9 +142,9 @@ function applyFilters() {
 function resetFilters() {
   searchInput.value = "";
   stageFilter.value = "";
-  ticketsFilter.value = false;
-  featuredFilter.value = false;
-  sortSelect.value = "time-asc";
+  ticketsFilter.checked = false;
+  featuredFilter.checked = false;
+  sortSelect.value = "";
 
   applyFilters();
 }
