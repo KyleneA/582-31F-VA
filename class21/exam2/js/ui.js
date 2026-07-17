@@ -26,29 +26,30 @@ export function renderError(error) {
   performanceCount.textContent = "0";
 }
 
-export function renderPerformances(performance) {
+export function renderPerformances(performances) {
   performanceContainer.innerHTML = "";
 
-  if (!performance) {
+  if (!performances) {
     statusOutput.textContent =
-      "No performances match " + "the current filters.";
-
+    "No performances match " + "the current filters.";
+    
     return;
   }
-
-  performance.forEach((item) => {
-    const card = document.createElement("performance");
-
-    card.data = item;
+  
+  performances.forEach((item) => {
+    const card = document.createElement("performance-card");
+    
+    card.performance = item;
 
     performanceContainer.appendChild(card);
   });
 
   statusOutput.textContent = "Festival lineup loaded successfully.";
 
-  performanceCount.textContent = performance.length;
+  performanceCount.textContent = performances.length;
 
-  ticketCount.textContent = Performance.totalAvailableTickets(performance);
+  ticketCount.textContent = Performance.totalAvailableTickets(performances);
 
-  averagePrice.textContent = Performance.averagePrice;
+  averagePrice.textContent = Performance.averagePrice(performances);
+
 }
