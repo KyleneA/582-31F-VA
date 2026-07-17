@@ -82,9 +82,12 @@ async function loadLineup() {
     console.log("Lineup loaded:", error);
 
     renderError(error.message);
+    loadButton.disabled = false;
+
+    return;
   }
 
-  loadButton.disabled = false;
+  loadButton.disabled = true;
 }
 
 function applyFilters() {
