@@ -41,14 +41,46 @@ function userPosition(position) {
 
             weatherSection.appendChild(display);
             console.log(response, currentWeather, currentWeatherUnits, forecast, display.weatherForecast);
+        }).catch((error) => {
+            statusP.textContent = error;
+            console.error(error)
         })
     
 }
 
 function locationError() {
-    statusP.textContent = "Location could not be assessed";
+    statusP.textContent = "Your location could not be assessed. See below for the weather in a randomized location.";
     statusP.className = "status text-danger"
-    console.log("Location could not be assessed");
+    console.error("Your location could not be assessed");
+
+    const randomLatitude = (Math.random() * (90 - -90) + -90);
+    const randomLongitude = (Math.random() * (180 - -180) + -180);
+
+    const randomPosition = {
+        latitude: randomLatitude,
+        longitude: randomLongitude
+    }
+
+    fetchWeatherInformation(randomPosition)
+        .then((response) => {
+            const currentWeather = response.current_weather;
+            const currentWeatherUnits = response.current_weather_units;
+
+            const forecast = new WeatherForecast(
+                randomPosition,
+                currentWeather,
+                currentWeatherUnits
+            )
+
+            const display = document.createElement("current-weather");
+            display.weatherForecast = forecast;
+
+            weatherSection.appendChild(display);
+
+        }).catch((error) => {
+            statusP.textContent = error;
+            console.error(error)
+        })
 }
 
 getUserPosition();
