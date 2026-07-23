@@ -7,17 +7,16 @@ export function getWeatherDescription(weatherCode, targetText, targetImg) {
             const time = date.getHours();
             const descriptions = response[weatherCode];
             
-            console.log(response, weatherCode, descriptions.day, time, 5 >= time >=  18);
-            if (5 >= time >=  18) {
+            if (5 <= time <=  18) {
                 const description = descriptions.day.description;
                 const imgUrl = descriptions.day.image;
-                console.log("day");
+
                 targetText.textContent = description;
                 targetImg.src = imgUrl;
             } else {
                 const description = descriptions.night.description;
                 const imgUrl = descriptions.night.image;
-                console.log("night");
+
                 targetText.textContent = description;
                 targetImg.src = imgUrl;
             }
