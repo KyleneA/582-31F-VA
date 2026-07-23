@@ -1,4 +1,6 @@
 import { fetchWeatherInformation } from "./api.js";
+import { WeatherForecast } from "./WeatherForecast.js";
+import { CurrentWeather } from "./CurrentWeather.js";
 
 const weatherSection = document.getElementById("weather-section");
 const statusP = document.getElementById("status");
@@ -25,8 +27,22 @@ function userPosition(position) {
 
     fetchWeatherInformation(userPosition)
         .then((response) => {
-            console.log(response);
+            const currentWeather = response.current_weather;
+            const currentWeatherUnits = response.current_weather_units;
+
+            const forecast = new WeatherForecast(
+                userPosition,
+                currentWeather,
+                currentWeatherUnits
+            )
+
+            const display = document.createElement("current-weather");
+            display.weatherForecast = forecast;
+
+            weatherSection.appendChild(display);
+            console.log(response, currentWeather, currentWeatherUnits, forecast, display.weatherForecast);
         })
+    
 }
 
 function locationError() {
